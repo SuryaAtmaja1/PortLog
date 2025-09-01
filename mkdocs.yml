@@ -3,87 +3,82 @@ site_name: PortLog
 site_url: https://suryaatmaja1.github.io/PortLog/
 site_author: Surya Atmaja, Riyan Naffa, Syahrul Afif
 site_description: >-
-  PortLog adalah proyek Junior Project (Junpro) yang berfokus pada sistem logging di pelabuhan. 
-  Aplikasi ini dirancang untuk membantu pencatatan aktivitas pelabuhan secara lebih efisien, 
-  terstruktur, dan mudah diakses.
+  PortLog adalah proyek Junior Project (Junpro) yang berfokus pada sistem logging di pelabuhan. Aplikasi ini dirancang untuk membantu pencatatan aktivitas pelabuhan secara lebih efisien, terstruktur, dan mudah diakses.
 
 # Repository
 repo_name: PortLog
 repo_url: https://github.com/SuryaAtmaja1/PortLog
-edit_uri: edit/main/docs/
 
 # Configuration
 theme:
   name: material
-  logo: images/logo.png   # ganti kalau sudah punya logo
-  favicon: images/favicon.ico
   features:
     - announce.dismiss
     - content.action.edit
     - content.action.view
     - content.code.annotate
     - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
     - content.tooltips
+    # - header.autohide
+    # - navigation.expand
     - navigation.footer
     - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
     - navigation.sections
     - navigation.tabs
+    # - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
     - search.highlight
     - search.share
     - search.suggest
     - toc.follow
-    - toc.integrate
-    - header.autohide
+    # - toc.integrate
   palette:
-    - scheme: default
-      primary: blue
-      accent: amber
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
-    - scheme: slate
-      primary: blue
-      accent: amber
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
       toggle:
         icon: material/toggle-switch-off
         name: Switch to system preference
   font:
-    text: Inter
-    code: JetBrains Mono
+    text: Roboto
+    code: Roboto Mono
 
-# Navigation
-nav:
-  - Home: index.md
-  - Panduan:
-      - Instalasi: docs/instalasi.md
-      - Penggunaan: docs/penggunaan.md
-  - Tentang:
-      - Tim: docs/tim.md
-      - Lisensi: docs/lisensi.md
-
-# Markdown Extensions
 markdown_extensions:
-  - admonition
+  - pymdownx.arithmatex:
+      generic: true
   - attr_list
-  - footnotes
   - md_in_html
+  - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.mark
   - pymdownx.critic
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.tabbed:
-      alternate_style: true
-  - toc:
-      permalink: true
 
-# Mermaid (diagram support)
-extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js
+
+# extra_javascript:
+#   - javascripts/katex.js
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+
+# extra_css:
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
