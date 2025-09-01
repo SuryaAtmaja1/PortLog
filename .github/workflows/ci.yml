@@ -2,8 +2,9 @@ name: ci
 on:
   push:
     branches:
-      - master 
-      - main
+      # - master 
+      # - main
+      - 518266
 permissions:
   contents: write
 jobs:
