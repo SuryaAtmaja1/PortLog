@@ -3,81 +3,188 @@ site_name: PortLog
 site_url: https://suryaatmaja1.github.io/PortLog/
 site_author: Surya Atmaja, Riyan Naffa, Syahrul Afif
 site_description: >-
-  PortLog adalah proyek Junior Project (Junpro) yang berfokus pada sistem logging di pelabuhan. Aplikasi ini dirancang untuk membantu pencatatan aktivitas pelabuhan secara lebih efisien, terstruktur, dan mudah diakses.
+  PortLog adalah proyek Junior Project (Junpro) yang berfokus pada sistem logging di pelabuhan. 
+  Aplikasi ini dirancang untuk membantu pencatatan aktivitas pelabuhan secara lebih efisien, 
+  terstruktur, dan mudah diakses.
 
 # Repository
 repo_name: PortLog
 repo_url: https://github.com/SuryaAtmaja1/PortLog
+edit_uri: edit/main/docs/
 
 # Configuration
 theme:
   name: material
+  language: id
+  custom_dir: overrides
+  
+  # Enhanced features
   features:
     - announce.dismiss
     - content.action.edit
     - content.action.view
     - content.code.annotate
     - content.code.copy
-    # - content.code.select
-    # - content.footnote.tooltips
-    # - content.tabs.link
+    - content.code.select
+    - content.footnote.tooltips
+    - content.tabs.link
     - content.tooltips
-    # - header.autohide
-    # - navigation.expand
+    - header.autohide
+    - navigation.expand
     - navigation.footer
     - navigation.indexes
-    # - navigation.instant
-    # - navigation.instant.prefetch
-    # - navigation.instant.progress
-    # - navigation.prune
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.prune
     - navigation.sections
     - navigation.tabs
-    # - navigation.tabs.sticky
+    - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
     - search.highlight
     - search.share
     - search.suggest
     - toc.follow
-    # - toc.integrate
+    - toc.integrate
+  
+  # Enhanced color palette
   palette:
+    # Light mode - Ocean Blue theme
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    
+    # Dark mode - Deep Sea theme
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    
+    # Auto mode
     - media: "(prefers-color-scheme)"
       toggle:
         icon: material/link
-        name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
-      toggle:
-        icon: material/toggle-switch-off
         name: Switch to system preference
-  font:
-    text: Roboto
-    code: Roboto Mono
 
+  # Enhanced typography
+  font:
+    text: Inter
+    code: JetBrains Mono
+  
+  # Custom favicon and logo
+  favicon: assets/images/favicon.png
+  logo: assets/images/logo.svg
+  
+  # Additional theme configuration
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+    annotation: material/arrow-right-circle
+
+# Enhanced plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+      lang: 
+        - en
+        - id
+  # Uncomment plugins below after installing them
+  # - minify:
+  #     minify_html: true
+  #     minify_js: true
+  #     minify_css: true
+  #     htmlmin_opts:
+  #       remove_comments: true
+  # - git-revision-date-localized:
+  #     enable_creation_date: true
+  #     type: timeago
+  #     timezone: Asia/Jakarta
+  # - git-committers:
+  #     repository: SuryaAtmaja1/PortLog
+  #     branch: main
+  # - social:
+  #     cards: true
+  #     cards_layout_options:
+  #       background_color: "#1565C0"
+  #       color: "#FFFFFF"
+
+# Alternative lightweight plugins (install these if needed)
+# - awesome-pages  # For better navigation organization
+# - macros         # For variables and custom macros
+# - redirects      # For URL redirects
+# - tags           # For content tagging
+
+# Enhanced markdown extensions
 markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+      toc_depth: 3
+
+  # Python Markdown Extensions
   - pymdownx.arithmatex:
       generic: true
-  - attr_list
-  - md_in_html
-  - admonition
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: SuryaAtmaja1
+      repo: PortLog
   - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
   - pymdownx.critic
 
-extra_javascript:
-  - javascripts/katex.js
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
 
-extra_css:
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+# extra_javascript:
+#   - javascripts/katex.js
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+
+# extra_css:
+#   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
