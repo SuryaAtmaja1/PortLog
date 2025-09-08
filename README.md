@@ -13,3 +13,6 @@ Aplikasi ini dirancang untuk membantu pencatatan aktivitas pelabuhan secara lebi
 - **Anggota 3:** Syahrul Afif Tri Anggara — 23/518266/TK/57027
 
 ---
+
+## Class Diagram
+![classdiagram](https://github.com/user-attachments/assets/5c3a43aa-b58b-4842-b9ff-ad966e175f20)
