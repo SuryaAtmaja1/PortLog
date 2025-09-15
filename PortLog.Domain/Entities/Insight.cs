@@ -1,4 +1,4 @@
-namespace PortLog.Domain
+namespace PortLog.Domain.Entities
 {
     public class Insight
     {
