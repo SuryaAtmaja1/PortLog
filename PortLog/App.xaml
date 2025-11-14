@@ -1,9 +1,94 @@
 ﻿<Application x:Class="PortLog.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PortLog"
+             xmlns:views="clr-namespace:PortLog.Views"
+             xmlns:vm="clr-namespace:PortLog.ViewModels"
+             xmlns:conv="clr-namespace:PortLog.Converters"
+             xmlns:help="clr-namespace:PortLog.Helpers"
              StartupUri="MainWindow.xaml">
+
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+            <conv:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
+
+            <conv:MenuActiveConverter x:Key="MenuActiveConverter"/>
+
+            <conv:ActiveMenuConverter x:Key="ActiveMenuConverter"/>
+
+            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+                <views:DashboardView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DashboardHomeViewModel}">
+                <views:DashboardHomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:CompanyManagementViewModel}">
+                <views:CompanyManagementView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:FleetViewModel}">
+                <views:FleetView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ShipViewModel}">
+                <views:ShipView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:VoyageListViewModel}">
+                <views:VoyageListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:InsightViewModel}">
+                <views:InsightView/>
+            </DataTemplate>
+
+
+            <Style x:Key="NavButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="0 6"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bd"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                                <ContentPresenter/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <!-- Hover -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="#0D353A"/>
+                                </Trigger>
+
+                                <!-- ACTIVE MENU -->
+                                <Trigger Property="help:NavigationHelper.IsActive" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
+    
+    

@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="PortLog.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:help="clr-namespace:PortLog.Helpers"
+             xmlns:vm="clr-namespace:PortLog.ViewModels">
+
+    <UserControl.DataContext>
+        <vm:DashboardViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <!-- LAYOUT: 2 Kolom -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- Content -->
+        </Grid.ColumnDefinitions>
+
+        <!-- ===================== SIDEBAR ===================== -->
+        <Border Background="#021F21"
+                Grid.Column="0">
+            <StackPanel Margin="10">
+
+                <!-- Logo -->
+                <TextBlock Text="PortLog"
+                           Foreground="White"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Margin="20 10 0 40" FontFamily="Plus Jakarta Sans"/>
+
+                <!-- NAVIGATION BUTTON -->
+                <Button Content="Dashboard"
+                        Command="{Binding NavigateCommand}"
+                        FontFamily="Plus Jakarta Sans"
+                        CommandParameter="Home"
+                        Tag="Home"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Home}"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button Content="Company"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Company"
+                        Tag="Company"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Company}"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button Content="Fleet"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Fleet"
+                        Tag="Fleet"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Fleet}"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button Content="Ship"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Ship"
+                        Tag="Ship"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Ship}"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button Content="Voyage List"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Voyage"
+                        Tag="Voyage"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Voyage}"
+                        Style="{StaticResource NavButtonStyle}"/>
+
+                <Button Content="Insight"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Insight"
+                        Tag="Insight"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Insight}"
+                        Style="{StaticResource NavButtonStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ===================== CONTENT AREA ===================== -->
+        <Border Grid.Column="1" Background="#FCFCFC">
+            <ContentControl Content="{Binding CurrentPage}"/>
+        </Border>
+
+    </Grid>
+</UserControl>

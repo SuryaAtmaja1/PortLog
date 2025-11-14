@@ -1,0 +1,1043 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\PunJro\\PortLog\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\converters\\activemenuconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\converters\\activemenuconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\converters\\menuactiveconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\converters\\menuactiveconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\converters\\nulloremptytovisibilityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\converters\\nulloremptytovisibilityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\accountrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\accountrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\helpers\\navigationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\helpers\\navigationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\insightview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\insightview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\insight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\insight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\ship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\ship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\portlog.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\portlog.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|d:\\punjro\\portlog\\portlog.domain\\portlog.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|solutionrelative:portlog.domain\\portlog.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\telemetrylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\telemetrylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\models\\voyagelog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\models\\voyagelog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\services\\globalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\services\\globalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|d:\\punjro\\portlog\\portlog.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|solutionrelative:portlog.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\dashboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\dashboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\dashboardhomeview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\dashboardhomeview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\dashboardview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\dashboardview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\supabase\\supabaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\supabase\\supabaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\fleetviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\fleetviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\insightviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\insightviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\companymanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\companymanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\dashboardhomeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\dashboardhomeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\voyagelistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\voyagelistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\viewmodels\\shipviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\viewmodels\\shipviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\enginestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\enginestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\supabase\\supabaseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\supabase\\supabaseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|d:\\punjro\\portlog\\portlog.domain\\enumerations\\accountrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|solutionrelative:portlog.domain\\enumerations\\accountrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\shipstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\shipstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\weather.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\weather.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\valueobjects\\shipregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\valueobjects\\shipregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\valueobjects\\position.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\valueobjects\\position.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\enumerations\\shiptype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\enumerations\\shiptype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|d:\\punjro\\portlog\\portlog.domain\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|solutionrelative:portlog.domain\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\shipview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\shipview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\dashboardhomeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\dashboardhomeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\voyagelistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\voyagelistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\fleetview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\fleetview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\companymanagementview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\companymanagementview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\companymanagementview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\companymanagementview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\fleetview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\fleetview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\voyagelistview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\voyagelistview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\shipview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\shipview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|d:\\punjro\\portlog\\portlog\\views\\insightview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AF4129E5-C875-A916-BBA9-3CAEB98798FB}|PortLog\\PortLog.csproj|solutionrelative:portlog\\views\\insightview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lenov\\AppData\\Local\\Temp\\.vsdbgsrc\\aad6be2495d0a786b94b3514a5b6903407fe2d6a75ad7e505df6a9d895927867\\XamlReader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|d:\\punjro\\portlog\\portlog.domain\\portlog.domain.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{5B7E3535-17B1-BA76-0D6F-6CB87EF2E4CA}|PortLog.Domain\\PortLog.Domain.csproj|solutionrelative:portlog.domain\\portlog.domain.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NullOrEmptyToVisibilityConverter.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Converters\\NullOrEmptyToVisibilityConverter.cs",
+              "RelativeDocumentMoniker": "PortLog\\Converters\\NullOrEmptyToVisibilityConverter.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Converters\\NullOrEmptyToVisibilityConverter.cs",
+              "RelativeToolTip": "PortLog\\Converters\\NullOrEmptyToVisibilityConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:03:51.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AccountRole.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\AccountRole.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\AccountRole.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\AccountRole.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\AccountRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:32.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountStatus.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\AccountStatus.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\AccountStatus.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\AccountStatus.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\AccountStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:32.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MenuActiveConverter.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Converters\\MenuActiveConverter.cs",
+              "RelativeDocumentMoniker": "PortLog\\Converters\\MenuActiveConverter.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Converters\\MenuActiveConverter.cs",
+              "RelativeToolTip": "PortLog\\Converters\\MenuActiveConverter.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T21:32:05.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ActiveMenuConverter.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Converters\\ActiveMenuConverter.cs",
+              "RelativeDocumentMoniker": "PortLog\\Converters\\ActiveMenuConverter.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Converters\\ActiveMenuConverter.cs",
+              "RelativeToolTip": "PortLog\\Converters\\ActiveMenuConverter.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAcwBUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T21:57:32.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Commands\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "PortLog\\Commands\\RelayCommand.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Commands\\RelayCommand.cs",
+              "RelativeToolTip": "PortLog\\Commands\\RelayCommand.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAgwBgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:05:31.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\MainWindow.xaml.cs",
+              "RelativeToolTip": "PortLog\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T11:47:00.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NavigationHelper.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Helpers\\NavigationHelper.cs",
+              "RelativeDocumentMoniker": "PortLog\\Helpers\\NavigationHelper.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Helpers\\NavigationHelper.cs",
+              "RelativeToolTip": "PortLog\\Helpers\\NavigationHelper.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAUwBwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T21:56:42.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\Account.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\Account.cs",
+              "RelativeToolTip": "PortLog\\Models\\Account.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAIwAcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:31:46.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Company.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\Company.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\Company.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\Company.cs",
+              "RelativeToolTip": "PortLog\\Models\\Company.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAcwDkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:06.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "InsightView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\InsightView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\InsightView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\InsightView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\InsightView.xaml.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAowBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:57:16.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": ".env",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\.env",
+              "RelativeDocumentMoniker": "PortLog\\.env",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\.env",
+              "RelativeToolTip": "PortLog\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAADfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-14T06:56:42.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Insight.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\Insight.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\Insight.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\Insight.cs",
+              "RelativeToolTip": "PortLog\\Models\\Insight.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:17.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Ship.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\Ship.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\Ship.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\Ship.cs",
+              "RelativeToolTip": "PortLog\\Models\\Ship.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:24.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PortLog.csproj",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\PortLog.csproj",
+              "RelativeDocumentMoniker": "PortLog\\PortLog.csproj",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\PortLog.csproj",
+              "RelativeToolTip": "PortLog\\PortLog.csproj",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-13T12:00:42.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PortLog.Domain",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog.Domain\\PortLog.Domain.csproj",
+              "RelativeDocumentMoniker": "PortLog.Domain\\PortLog.Domain.csproj",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog.Domain\\PortLog.Domain.csproj",
+              "RelativeToolTip": "PortLog.Domain\\PortLog.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T09:37:13.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Services\\AccountService.cs",
+              "RelativeDocumentMoniker": "PortLog\\Services\\AccountService.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Services\\AccountService.cs",
+              "RelativeToolTip": "PortLog\\Services\\AccountService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAswBUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:51:54.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TelemetryLog.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\TelemetryLog.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\TelemetryLog.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\TelemetryLog.cs",
+              "RelativeToolTip": "PortLog\\Models\\TelemetryLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:57.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GlobalService.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Services\\GlobalService.cs",
+              "RelativeDocumentMoniker": "PortLog\\Services\\GlobalService.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Services\\GlobalService.cs",
+              "RelativeToolTip": "PortLog\\Services\\GlobalService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAADwvwIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:55:22.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "VoyageLog.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Models\\VoyageLog.cs",
+              "RelativeDocumentMoniker": "PortLog\\Models\\VoyageLog.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Models\\VoyageLog.cs",
+              "RelativeToolTip": "PortLog\\Models\\VoyageLog.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAADwvwEAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:34:12.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog.Domain\\Entities\\Account.cs",
+              "RelativeDocumentMoniker": "PortLog.Domain\\Entities\\Account.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog.Domain\\Entities\\Account.cs",
+              "RelativeToolTip": "PortLog.Domain\\Entities\\Account.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T10:49:46.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAiwBIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:08:28.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "LoginView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\LoginView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\LoginView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\LoginView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\LoginView.xaml.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAswB8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:30:10.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DashboardView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\DashboardView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\DashboardView.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAASwBcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:42:06.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DashboardHomeView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardHomeView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\DashboardHomeView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardHomeView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\DashboardHomeView.xaml.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T21:09:55.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "DashboardView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\DashboardView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\DashboardView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T14:41:39.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "SupabaseService.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Supabase\\SupabaseService.cs",
+              "RelativeDocumentMoniker": "PortLog\\Supabase\\SupabaseService.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Supabase\\SupabaseService.cs",
+              "RelativeToolTip": "PortLog\\Supabase\\SupabaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:26:05.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "LoginView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\LoginView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\LoginView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\LoginView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\LoginView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T12:01:32.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAUwBMAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:07:49.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "FleetViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\FleetViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\FleetViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\FleetViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\FleetViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:48:32.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAcwBsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T14:09:21.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "VoyageListViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\VoyageListViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\VoyageListViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\VoyageListViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\VoyageListViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:48:56.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CompanyManagementViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\CompanyManagementViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\CompanyManagementViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\CompanyManagementViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\CompanyManagementViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:48:11.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "DashboardHomeViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\DashboardHomeViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\DashboardHomeViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\DashboardHomeViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\DashboardHomeViewModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T21:05:24.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ShipViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\ShipViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\ShipViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\ShipViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\ShipViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:48:45.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "InsightViewModel.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\InsightViewModel.cs",
+              "RelativeDocumentMoniker": "PortLog\\ViewModels\\InsightViewModel.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ViewModels\\InsightViewModel.cs",
+              "RelativeToolTip": "PortLog\\ViewModels\\InsightViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:49:37.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "PortLog\\MainWindow.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\MainWindow.xaml",
+              "RelativeToolTip": "PortLog\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T10:52:58.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "EngineStatus.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\EngineStatus.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\EngineStatus.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\EngineStatus.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\EngineStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:41.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "SupabaseClient.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Supabase\\SupabaseClient.cs",
+              "RelativeDocumentMoniker": "PortLog\\Supabase\\SupabaseClient.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Supabase\\SupabaseClient.cs",
+              "RelativeToolTip": "PortLog\\Supabase\\SupabaseClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T07:11:04.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "AccountRole.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog.Domain\\Enumerations\\AccountRole.cs",
+              "RelativeDocumentMoniker": "PortLog.Domain\\Enumerations\\AccountRole.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog.Domain\\Enumerations\\AccountRole.cs",
+              "RelativeToolTip": "PortLog.Domain\\Enumerations\\AccountRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T15:38:21.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\App.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\App.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\App.xaml.cs",
+              "RelativeToolTip": "PortLog\\App.xaml.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAqwB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T10:52:55.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\App.xaml",
+              "RelativeDocumentMoniker": "PortLog\\App.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\App.xaml",
+              "RelativeToolTip": "PortLog\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T10:53:10.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ShipStatus.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\ShipStatus.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\ShipStatus.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\ShipStatus.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\ShipStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:46.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Weather.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\Weather.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\Weather.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\Weather.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\Weather.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:57.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "ShipRegistration.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ValueObjects\\ShipRegistration.cs",
+              "RelativeDocumentMoniker": "PortLog\\ValueObjects\\ShipRegistration.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ValueObjects\\ShipRegistration.cs",
+              "RelativeToolTip": "PortLog\\ValueObjects\\ShipRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:43.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Position.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\ValueObjects\\Position.cs",
+              "RelativeDocumentMoniker": "PortLog\\ValueObjects\\Position.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\ValueObjects\\Position.cs",
+              "RelativeToolTip": "PortLog\\ValueObjects\\Position.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:33:38.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "ShipType.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\ShipType.cs",
+              "RelativeDocumentMoniker": "PortLog\\Enumerations\\ShipType.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Enumerations\\ShipType.cs",
+              "RelativeToolTip": "PortLog\\Enumerations\\ShipType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T08:32:52.382Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Company.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog.Domain\\Entities\\Company.cs",
+              "RelativeDocumentMoniker": "PortLog.Domain\\Entities\\Company.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog.Domain\\Entities\\Company.cs",
+              "RelativeToolTip": "PortLog.Domain\\Entities\\Company.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T10:49:44.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "ShipView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\ShipView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\ShipView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\ShipView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\ShipView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:57:22.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "PortLog\\AssemblyInfo.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\AssemblyInfo.cs",
+              "RelativeToolTip": "PortLog\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T10:49:36.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "DashboardHomeView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardHomeView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\DashboardHomeView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\DashboardHomeView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\DashboardHomeView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T21:05:06.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "VoyageListView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\VoyageListView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\VoyageListView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\VoyageListView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\VoyageListView.xaml.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAowBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:57:28.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "FleetView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\FleetView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\FleetView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\FleetView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\FleetView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:56:04.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "CompanyManagementView.xaml.cs",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\CompanyManagementView.xaml.cs",
+              "RelativeDocumentMoniker": "PortLog\\Views\\CompanyManagementView.xaml.cs",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\CompanyManagementView.xaml.cs",
+              "RelativeToolTip": "PortLog\\Views\\CompanyManagementView.xaml.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAowBMAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:53:15.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "CompanyManagementView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\CompanyManagementView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\CompanyManagementView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\CompanyManagementView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\CompanyManagementView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T15:53:34.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "FleetView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\FleetView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\FleetView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\FleetView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\FleetView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T15:51:05.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "VoyageListView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\VoyageListView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\VoyageListView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\VoyageListView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\VoyageListView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T15:56:02.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ShipView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\ShipView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\ShipView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\ShipView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\ShipView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T15:55:29.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "InsightView.xaml",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog\\Views\\InsightView.xaml",
+              "RelativeDocumentMoniker": "PortLog\\Views\\InsightView.xaml",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog\\Views\\InsightView.xaml",
+              "RelativeToolTip": "PortLog\\Views\\InsightView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-13T15:51:15.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "XamlReader.cs",
+              "DocumentMoniker": "C:\\Users\\lenov\\AppData\\Local\\Temp\\.vsdbgsrc\\aad6be2495d0a786b94b3514a5b6903407fe2d6a75ad7e505df6a9d895927867\\XamlReader.cs",
+              "ToolTip": "C:\\Users\\lenov\\AppData\\Local\\Temp\\.vsdbgsrc\\aad6be2495d0a786b94b3514a5b6903407fe2d6a75ad7e505df6a9d895927867\\XamlReader.cs [Read Only]",
+              "ViewState": "AgIAALEBAAAAAAAAAAAgwLUBAAAqAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T16:51:56.127Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "PortLog.Domain",
+              "DocumentMoniker": "D:\\PunJro\\PortLog\\PortLog.Domain\\PortLog.Domain.csproj",
+              "RelativeDocumentMoniker": "PortLog.Domain\\PortLog.Domain.csproj",
+              "ToolTip": "D:\\PunJro\\PortLog\\PortLog.Domain\\PortLog.Domain.csproj",
+              "RelativeToolTip": "PortLog.Domain\\PortLog.Domain.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-13T14:11:16.982Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
