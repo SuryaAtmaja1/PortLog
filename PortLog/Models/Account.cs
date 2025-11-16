@@ -1,7 +1,7 @@
 using PortLog.Enumerations;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System;
+using System.Text.Json.Serialization;
 
 namespace PortLog.Models
 {
@@ -22,25 +22,10 @@ namespace PortLog.Models
         public string Password { get; set; }
 
         [Column("account_role")]
-        public string AccountRoleString
-        {
-            get => AccountRole.ToString();
-            set => AccountRole = Enum.Parse<AccountRole>(value);
-        }
+        public string Role { get; set; }
 
-        public AccountRole AccountRole { get; set; }
-
-        [Column("status")]
-        public string StatusString
-        {
-            get => Status.ToString();
-            set => Status = Enum.Parse<AccountStatus>(value);
-        }
-
-        public AccountStatus Status { get; set; }
-
-        [Column("company")]
-        public string Company { get; set; }
+        [Column("company_id")]
+        public Guid CompanyId { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -48,31 +33,15 @@ namespace PortLog.Models
         [Column("last_updated")]
         public DateTime LastUpdated { get; set; }
 
-        [Column("last_login")]
-        public DateTime LastLogin { get; set; }
+        [Column("contact")]
+        public string Contact { get; set; }
 
-        public Account() { } 
-
-        public Account(string name, string email, string password, AccountRole role, string company)
+        // Helper property for type-safe access (not stored in DB)
+        [JsonIgnore]
+        public AccountRole RoleEnum
         {
-            Id = Guid.NewGuid();
-            Name = name;
-            Email = email;
-            Password = password;  
-            AccountRole = role;
-            Status = AccountStatus.OFFLINE;
-            Company = company;
-
-            var now = DateTime.UtcNow;
-            CreatedAt = now;
-            LastUpdated = now;
-            LastLogin = now;
-        }
-
-        public void UpdatePassword(string newPassword)
-        {
-            Password = newPassword; 
-            LastUpdated = DateTime.UtcNow;
+            get => Enum.TryParse<AccountRole>(Role, out var role) ? role : AccountRole.CAPTAIN;
+            set => Role = value.ToString();
         }
     }
 }

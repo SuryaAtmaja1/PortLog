@@ -20,11 +20,31 @@
     <Compile Update="Views\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Register1View.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Register2View.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Register3View.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\VoyageListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Register1View.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Register2View.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Register3View.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
