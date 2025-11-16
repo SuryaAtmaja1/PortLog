@@ -3,16 +3,17 @@ using DotNetEnv;
 
 public static class SupabaseClient
 {
-    public static Supabase.Client Instance { get; private set; }
+    public static Client? Instance { get; private set; }
 
     public static async Task InitAsync()
     {
-        DotNetEnv.Env.Load();
+        Env.Load();
 
-        var url = Environment.GetEnvironmentVariable("SUPABASE_URL");
-        var key = Environment.GetEnvironmentVariable("SUPABASE_KEY");
-
-        Instance = new Supabase.Client(url, key, new SupabaseOptions
+        string url = Env.GetString("SUPABASE_URL");
+        string key = Env.GetString("SUPABASE_KEY");
+        
+        
+        Instance = new Client(url, key, new SupabaseOptions
         {
             AutoConnectRealtime = true
         });
