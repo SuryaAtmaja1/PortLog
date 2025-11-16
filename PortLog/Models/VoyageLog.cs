@@ -1,66 +1,48 @@
+using PortLog.Enumerations;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
+using System.Text.Json.Serialization;
+
 namespace PortLog.Models
-{ 
-    public class VoyageLog
+{
+    public class VoyageLog : BaseModel
     {
-        private readonly List<TelemetryLog> _telemetryLogs = new();
-        private float _totalDistanceTraveled;
-        private float _averageFuelConsumption;
-        private float _averageSpeed;
+        [PrimaryKey("id")]
+        [Column("id")]
+        public long Id { get; set; }
 
-        public Guid Id { get; }
-        public DateTime DepartureTime { get; private set; }
-        public DateTime? ArrivalTime { get; private set; }
-        public string DeparturePort { get; private set; }
-        public string? ArrivalPort { get; private set; }
-        public string? Notes { get; private set; }
+        [Column("ship_id")]
+        public long ShipId { get; set; }
 
-        public IReadOnlyCollection<TelemetryLog> TelemetryLogs => _telemetryLogs.AsReadOnly();
-        public TimeSpan? TripTime => ArrivalTime.HasValue ? ArrivalTime - DepartureTime : null;
-        public float TotalDistanceTraveled => _totalDistanceTraveled;
-        public float AverageFuelConsumption => _averageFuelConsumption;
-        public float AverageSpeed => _averageSpeed;
+        [Column("departure_time")]
+        public DateTime DepartureTime { get; set; }
 
-        private VoyageLog(Guid id, DateTime departureTime, string departurePort, string? notes = null)
+        [Column("arrival_time")]
+        public DateTime ArrivalTime { get; set; }
+
+        [Column("departure_port")]
+        public string DeparturePort { get; set;; }
+
+        [Column("arrival_port")]
+        public string ArrivalPort { get; set; }
+
+        [Column("notes")]
+        public string Notes { get; set; }
+
+        [Column("total_distance_traveled")]
+        public double TotalDistanceTraveled { get; set; }
+
+        [Column("average_fuel_consumption")]
+        public double AverageFuelConsumption { get; set; }
+
+        [Column("revenue_idr_cents")]
+        public long Revenue { get; set; }
+
+        [JsonIgnore]
+        public decimal RevenueIdr
         {
-            Id = id;
-            DepartureTime = departureTime;
-            DeparturePort = departurePort;
-            Notes = notes;
-        }
-
-        public static VoyageLog Start(Guid id, DateTime departureTime, string departurePort, string? notes = null)
-        {
-            return new VoyageLog(id, departureTime, departurePort, notes);
-        }
-
-        public void AddTelemetryLog(TelemetryLog log)
-        {
-            if (ArrivalTime != null)
-                throw new InvalidOperationException("Voyage already completed.");
-
-            if (log.ShipId == Guid.Empty)
-                throw new ArgumentException("Telemetry log must be linked to a ship.");
-
-            if (_telemetryLogs.Any())
-            {
-                var lastLog = _telemetryLogs.Last();
-                var distance = log.HaversineDistance(lastLog.PositionLat, lastLog.PositionLong,
-                                            log.PositionLat, log.PositionLong);
-                _totalDistanceTraveled += distance;
-            }
-
-            _telemetryLogs.Add(log);
-            _averageSpeed = _telemetryLogs.Average(l => l.Speed);
-            _averageFuelConsumption = _telemetryLogs.Average(l => l.FuelConsumption);
-        }
-
-        public void CompleteVoyage(DateTime arrivalTime, string arrivalPort)
-        {
-            if (arrivalTime <= DepartureTime)
-                throw new ArgumentException("Arrival time must be after departure time.");
-
-            ArrivalTime = arrivalTime;
-            ArrivalPort = arrivalPort;
+            get => Revenue / 100m;
+            set => Revenue = (long)(value * 100);
         }
     }
 }

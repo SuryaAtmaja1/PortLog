@@ -1,50 +1,39 @@
 using PortLog.Enumerations;
-using PortLog.ValueObjects;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
+using System.Text.Json.Serialization;
 
 namespace PortLog.Models
 {
-    public class Ship
+    public class Ship : BaseModel
     {
-        public Guid Id { get; private set; }
-        private readonly List<ShipRegistrationId> _registeredIds = [];
-        public IReadOnlyCollection<ShipRegistrationId> RegisteredIds => _registeredIds.AsReadOnly();
-        public Guid CompanyId { get; private set; }
-        public string Name { get; private set; }
-        public ShipType Type { get; private set; }
-        public Guid CaptainId { get; private set; }
-        public int PassengerCapacity { get; private set; }
-        public ShipStatus Status { get; private set; }
-        private readonly List<TelemetryLog> _telemetryLogs = [];
-        public IReadOnlyCollection<TelemetryLog> TelemetryLogs => _telemetryLogs.AsReadOnly();
+        [PrimaryKey("id")]
+        [Column("id")]
+        public long Id { get; set; }
 
-        public Ship(Guid companyId, string name, ShipType type, Guid captainId)
+        [Column("company_id")]
+        public Guid CompanyId { get; set; }
+
+        [Column("captain_id")]
+        public Guid CaptainId { get; set; }
+
+        [Column("name")]
+        public string Name { get; set; }
+
+        [Column("type")]
+        public string Type { get; set; }
+
+        [Column("passenger_capacity")]
+        public int PassengerCapacity { get; set; }
+
+        [Column("status")]
+        public string Status { get; set; }
+
+        [JsonIgnore]
+        public ShipType ShipTypeEnum
         {
-            CompanyId = companyId;
-            Name = name;
-            Type = type;
-            CaptainId = captainId;
-            Status = ShipStatus.STANDBY;
-        }
-
-        // Behavior: Tambah registrasi baru
-        public void AddRegistration(ShipRegistrationId registration)
-        {
-            if (_registeredIds.Contains(registration))
-                throw new InvalidOperationException("Registration already exists for this ship.");
-
-            _registeredIds.Add(registration);
-        }
-
-        // Behavior: Hapus registrasi
-        public void RemoveRegistration(ShipRegistrationId registration)
-        {
-            _registeredIds.Remove(registration);
-        }
-
-        // Behavior: Cari registrasi berdasarkan organisasi
-        public ShipRegistrationId? GetRegistrationByOrg(string organization)
-        {
-            return _registeredIds.FirstOrDefault(r => r.Organization == organization);
+            get => Enum.TryParse<ShipType>(Type, out var type) ? type : ShipType.MULTI_PURPOSE_VESSEL;
+            set => Type = value.ToString();
         }
     }
 }
