@@ -1,23 +1,26 @@
 ﻿using Supabase;
 using DotNetEnv;
 
-public static class SupabaseClient
+namespace PortLog.Supabase
 {
-    public static Client? Instance { get; private set; }
-
-    public static async Task InitAsync()
+    public static class SupabaseClient
     {
-        Env.Load();
+        public static Client? Instance { get; private set; }
 
-        string url = Env.GetString("SUPABASE_URL");
-        string key = Env.GetString("SUPABASE_KEY");
-        
-        
-        Instance = new Client(url, key, new SupabaseOptions
+        public static async Task InitAsync()
         {
-            AutoConnectRealtime = true
-        });
+            Env.Load();
 
-        await Instance.InitializeAsync();
+            string url = Env.GetString("SUPABASE_URL") ?? throw new Exception("Supabase URL not found");
+            string key = Env.GetString("SUPABASE_KEY") ?? throw new Exception("Supabase key not found");
+        
+        
+            Instance = new Client(url, key, new SupabaseOptions
+            {
+                AutoConnectRealtime = true
+            });
+
+            await Instance.InitializeAsync();
+        }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PortLog.ViewModels
+namespace PortLog.Helpers
 {
-    public partial class AppViewModel: ObservableObject
+    public class CreateJoinCode
     {
     }
 }

@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PortLog.ViewModels;
+﻿using PortLog.ViewModels;
 
 namespace PortLog.Services
 {
     public class NavigationService
     {
-        private readonly MainViewModel _mainViewModel;
+        public MainViewModel MainViewModel;
 
         public NavigationService(MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
+            MainViewModel = mainViewModel;
         }
 
         public void NavigateTo<T>() where T : BaseViewModel
         {
             var viewModel = Activator.CreateInstance(typeof(T), this) as BaseViewModel;
-            _mainViewModel.CurrentViewModel = viewModel;
+            MainViewModel.CurrentViewModel = viewModel;
         }
 
         public void NavigateTo(BaseViewModel viewModel)
         {
-            _mainViewModel.CurrentViewModel = viewModel;
+            MainViewModel.CurrentViewModel = viewModel;
         }
     }
 }

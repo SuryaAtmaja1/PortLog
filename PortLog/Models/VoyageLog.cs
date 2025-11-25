@@ -21,7 +21,7 @@ namespace PortLog.Models
         public DateTime ArrivalTime { get; set; }
 
         [Column("departure_port")]
-        public string DeparturePort { get; set;; }
+        public string DeparturePort { get; set; }
 
         [Column("arrival_port")]
         public string ArrivalPort { get; set; }
