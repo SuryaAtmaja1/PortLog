@@ -1,54 +1,79 @@
-﻿using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using PortLog.Commands;      // RelayCommand
-using PortLog.Services;      // GlobalServices / AccountService (optional)
+using PortLog.Enumerations;
+using PortLog.Supabase;
+using PortLog.Services;
  
 namespace PortLog.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
-        private readonly MainViewModel _main;
-        public LoginViewModel(MainViewModel main)
-        {
-            _main = main;
-            LoginCommand = new RelayCommand(async _ => await Login());
-        }
-
-        private string _email;
-        public string Email
-        {
-            get => _email;
-            set { _email = value; OnPropertyChanged(nameof(Email)); }
-        }
-
+        private readonly NavigationService _navigationService;
+        private readonly AccountService _accountService;
+        private string _username;
         private string _password;
+        private string _errorMessage;
+
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
+
         public string Password
         {
             get => _password;
-            set { _password = value; OnPropertyChanged(nameof(Password)); }
+            set => SetProperty(ref _password, value);
         }
 
-        private string _error;
-        public string Error
+        public string ErrorMessage
         {
-            get => _error;
-            set { _error = value; OnPropertyChanged(nameof(Error)); }
+            get => _errorMessage;
+            set => SetProperty(ref _errorMessage, value);
         }
+
         public ICommand LoginCommand { get; }
+        public ICommand NavigateToRegisterCommand { get; }
 
-        private async Task Login()
+        public LoginViewModel(NavigationService navigationService, AccountService accountService)
         {
-            var ok = await GlobalServices.Account.LoginAsync(Email, Password);
+            _navigationService = navigationService;
+            _accountService = accountService;
 
-            if (ok)
-                _main.NavigateToDashboard();
-            else
-                Error = "Incorrect email or password.";
+            LoginCommand = new RelayCommand(Login, CanLogin);
+            NavigateToRegisterCommand = new RelayCommand(_ => NavigateToRegister());
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private bool CanLogin(object parameter)
+        {
+            return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
+        }
+
+        private async void Login(object parameter)
+        {
+            var (success, error) = await _accountService.LoginAsync(Username, Password);
+
+            if (success)
+            {
+                // Navigate to appropriate dashboard based on role
+                if (_accountService.LoggedInAccount?.RoleEnum == AccountRole.MANAGER)
+                {
+                    _navigationService.NavigateTo(new DashboardManagerViewModel(_navigationService, _accountService));
+                }
+                else
+                {
+                    _navigationService.NavigateTo(new DashboardCaptainViewModel(_navigationService, _accountService));
+                }
+            }
+            else
+            {
+                ErrorMessage = error;
+            }
+        }
+
+        private void NavigateToRegister()
+        {
+            _navigationService.NavigateTo(new Register1ViewModel(_navigationService, _accountService));
+        }
     }
 }

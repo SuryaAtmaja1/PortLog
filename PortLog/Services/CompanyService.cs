@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PortLog.Models;
-using Supabase;
+﻿using PortLog.Models;
+using PortLog.Supabase;
 
 namespace PortLog.Services
 {
     public class CompanyService
     {
-        private Client Client => SupabaseClient.Instance;
+        private readonly SupabaseService _supabase;
 
-        public async Task<List<Company>> SearchCompaniesAsync(string joinCode)
+        public CompanyService(SupabaseService supabase)
+        {
+            _supabase = supabase;
+        }
+
+        public async Task<List<Company>> SearchCompaniesAsync(
+            string joinCode)
         {
             if (string.IsNullOrWhiteSpace(joinCode))
                 return new List<Company>();
 
             try
             {
-                var response = await Client
-                    .From<Company>()
+                var response = await _supabase
+                    .Table<Company>()
                     .Get();
 
-                // Filter in memory (Supabase client doesn't support LIKE operator easily)
+                // Filter by Join code
                 var companies = response.Models
                     .Where(c => c.JoinCode == joinCode)
                     .ToList();
@@ -36,12 +37,13 @@ namespace PortLog.Services
             }
         }
 
-        public async Task<Company> GetCompanyByIdAsync(Guid id)
+        public async Task<Company?> GetCompanyByIdAsync(
+            Guid id)
         {
             try
             {
-                var response = await Client
-                    .From<Company>()
+                var response = await _supabase
+                    .Table<Company>()
                     .Where(c => c.Id == id)
                     .Single();
 
@@ -76,8 +78,8 @@ namespace PortLog.Services
                     LastUpdated = DateTime.UtcNow
                 };
 
-                var response = await Client
-                    .From<Company>()
+                var response = await _supabase
+                    .Table<Company>()
                     .Insert(newCompany);
 
                 var createdCompany = response.Models.FirstOrDefault();
@@ -95,12 +97,14 @@ namespace PortLog.Services
             }
         }
 
-        public async Task<bool> JoinCompanyAsync(Guid companyId, Account user)
+        public async Task<bool> JoinCompanyAsync(
+            Guid companyId,
+            Account user)
         {
             try
             {
-                await Client
-                    .From<Account>()
+                await _supabase
+                    .Table<Account>()
                     .Where(a => a.Id == user.Id)
                     .Set(a => a.CompanyId, companyId)
                     .Update();

@@ -1,33 +1,127 @@
 ﻿using PortLog.Enumerations;
 using PortLog.Models;
 using Supabase;
+using Postgrest = Supabase.Postgrest;
+using System.Diagnostics;
+using PortLog.Supabase;
 
 namespace PortLog.Services
 {
     public class AccountService
     {
-        private Client Client => SupabaseClient.Instance;
-
+        private readonly SupabaseService _supabase;
         public Account? LoggedInAccount { get; private set; }
 
-        public async Task<bool> LoginAsync(string email, string password)
+        public AccountService(SupabaseService supabase)
         {
-            var query = await Client
-                .From<Account>()
-                .Where(a => a.Email == email)
-                .Get();
+            _supabase = supabase;
+        }
 
-            var acc = query.Models.FirstOrDefault();
+        public async Task<(bool success, string error)> LoginAsync(
+            string email,
+            string password)
+        {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                return (false, "Email atau password kosong!");
 
-            if (acc == null)
-                return false;
+            try
+            {
+                Debug.WriteLine($"[LoginAsync] Attempting login for email: {email}");
+                Debug.WriteLine($"[LoginAsync] Password length: {password.Length}");
+                Debug.WriteLine($"[LoginAsync] Account table name: {_supabase.Table<Account>().TableName}");
 
-            if (acc.Password != password)
-                return false;
+                // Try to get ALL accounts first (to verify table access)
+                Debug.WriteLine("[LoginAsync] Attempting to fetch all accounts (limit 5)...");
+                var allAccounts = await _supabase
+                    .Table<Account>()
+                    .Limit(5)
+                    .Get();
 
-            LoggedInAccount = acc;
+                Debug.WriteLine($"[LoginAsync] Total accounts in table: {allAccounts.Models?.Count ?? 0}");
 
-            return true;
+                if (allAccounts.Models != null && allAccounts.Models.Any())
+                {
+                    Debug.WriteLine("[LoginAsync] Sample accounts found:");
+                    foreach (var sample in allAccounts.Models)
+                    {
+                        Debug.WriteLine($"  - Email: '{sample.Email}', Name: '{sample.Name}', Role: '{sample.Role}'");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("[LoginAsync] WARNING: No accounts found in table at all!");
+                    Debug.WriteLine("[LoginAsync] This suggests either:");
+                    Debug.WriteLine("  1. The table is empty");
+                    Debug.WriteLine("  2. The table name is wrong");
+                    Debug.WriteLine("  3. The Account model mapping is incorrect");
+                }
+
+                // First, let's check if the email exists at all
+                Debug.WriteLine($"[LoginAsync] Now searching for specific email: {email}");
+                var emailCheck = await _supabase
+                    .Table<Account>()
+                    .Where(a => a.Email == email)
+                    .Get();
+
+                Debug.WriteLine($"[LoginAsync] Email check - Found {emailCheck.Models?.Count ?? 0} accounts with this email");
+
+                if (emailCheck.Models != null && emailCheck.Models.Any())
+                {
+                    var foundAccount = emailCheck.Models.First();
+                    Debug.WriteLine($"[LoginAsync] Account details:");
+                    Debug.WriteLine($"  - Email: '{foundAccount.Email}'");
+                    Debug.WriteLine($"  - Name: '{foundAccount.Name}'");
+                    Debug.WriteLine($"  - Role: '{foundAccount.Role}'");
+                    Debug.WriteLine($"  - Password length in DB: {foundAccount.Password?.Length ?? 0}");
+                    Debug.WriteLine($"  - Password match: {foundAccount.Password == password}");
+
+                    // Check for whitespace issues
+                    if (foundAccount.Password != password)
+                    {
+                        Debug.WriteLine($"  - DB Password (with quotes): '{foundAccount.Password}'");
+                        Debug.WriteLine($"  - Input Password (with quotes): '{password}'");
+                        Debug.WriteLine($"  - DB Password trimmed match: {foundAccount.Password?.Trim() == password.Trim()}");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("[LoginAsync] Email not found in database at all!");
+                }
+
+                // Now try the original query with both email and password
+                var response = await _supabase
+                    .Table<Account>()
+                    .Where(a => a.Email == email && a.Password == password)
+                    .Get();
+
+                Debug.WriteLine($"[LoginAsync] Full query executed. Response status: {response.ResponseMessage?.StatusCode}");
+                Debug.WriteLine($"[LoginAsync] Number of models returned: {response.Models?.Count ?? 0}");
+
+                var acc = response.Models.FirstOrDefault();
+
+                if (acc == null)
+                {
+                    Debug.WriteLine("[LoginAsync] No account found matching both email AND password");
+                    return (false, "Email atau password salah!");
+                }
+
+                LoggedInAccount = acc;
+                Debug.WriteLine($"[LoginAsync] Login successful for: {acc.Email}");
+                return (true, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[LoginAsync] Exception occurred: {ex.GetType().Name}");
+                Debug.WriteLine($"[LoginAsync] Exception message: {ex.Message}");
+                Debug.WriteLine($"[LoginAsync] Stack trace: {ex.StackTrace}");
+
+                if (ex.InnerException != null)
+                {
+                    Debug.WriteLine($"[LoginAsync] Inner exception: {ex.InnerException.Message}");
+                }
+
+                return (false, $"Login gagal: {ex.Message}");
+            }
         }
 
         public async Task<(bool success, string error)> RegisterAsync(
@@ -37,20 +131,26 @@ namespace PortLog.Services
             string password)
         {
             if (string.IsNullOrWhiteSpace(password))
-            {
                 return (false, "Password kosong!");
-            }
+            if (password.Length < 8)
+                return (false, "Password minimal 8 karakter!");
 
             try
             {
-                // Check if email already exists
-                var existingUser = await Client
-                    .From<Account>()
-                    .Where(a => a.Email == email)
+                Debug.WriteLine($"[RegisterAsync] Checking email uniqueness for: {email}");
+
+                // Check email uniqueness
+                var check = await _supabase
+                    .Table<Account>()
+                    .Select("email")
+                    .Filter("email", Postgrest.Constants.Operator.Equals, email)
                     .Get();
 
-                if (existingUser.Models.Any())
+                Debug.WriteLine($"[RegisterAsync] Email check returned {check.Models?.Count ?? 0} results");
+
+                if (check.Models.Any())
                 {
+                    Debug.WriteLine("[RegisterAsync] Email already exists");
                     return (false, "Email telah dipakai!");
                 }
 
@@ -61,53 +161,73 @@ namespace PortLog.Services
                     Password = password,
                     Name = name,
                     Role = role.ToString(),
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    LastUpdated = DateTime.UtcNow
                 };
 
-                var response = await Client
-                    .From<Account>()
+                Debug.WriteLine($"[RegisterAsync] Inserting new account: {email}, Role: {role}");
+
+                var result = await _supabase
+                    .Table<Account>()
                     .Insert(newAccount);
 
-                var createdAccount = response.Models.FirstOrDefault();
+                Debug.WriteLine($"[RegisterAsync] Insert completed. Models count: {result.Models?.Count ?? 0}");
 
-                if (createdAccount != null)
+                LoggedInAccount = result.Models.FirstOrDefault();
+
+                if (LoggedInAccount != null)
                 {
-                    LoggedInAccount = createdAccount;
-                    return (true, string.Empty);
+                    Debug.WriteLine($"[RegisterAsync] Registration successful for: {LoggedInAccount.Email}");
                 }
 
-                return (false, "Gagal membuat akun!");
+                return (true, "");
             }
             catch (Exception ex)
             {
+                Debug.WriteLine($"[RegisterAsync] Exception occurred: {ex.GetType().Name}");
+                Debug.WriteLine($"[RegisterAsync] Exception message: {ex.Message}");
+                Debug.WriteLine($"[RegisterAsync] Stack trace: {ex.StackTrace}");
+
+                if (ex.InnerException != null)
+                {
+                    Debug.WriteLine($"[RegisterAsync] Inner exception: {ex.InnerException.Message}");
+                }
+
                 return (false, $"Register gagal: {ex.Message}");
             }
         }
-        public async Task<bool> UpdateUserCompanyAsync(
-            Guid companyId
-            )
+
+        public async Task<bool> UpdateUserCompanyAsync(Guid companyId)
         {
-            if (LoggedInAccount == null) return false;
+            if (LoggedInAccount == null)
+            {
+                Debug.WriteLine("[UpdateUserCompanyAsync] No logged in account");
+                return false;
+            }
 
             try
             {
+                Debug.WriteLine($"[UpdateUserCompanyAsync] Updating company ID to: {companyId} for user: {LoggedInAccount.Email}");
+
                 LoggedInAccount.CompanyId = companyId;
 
-                await Client
-                    .From<Account>()
-                    .Where(a => a.Id == LoggedInAccount.Id)
-                    .Set(a => a.CompanyId, companyId)
-                    .Update();
+                await _supabase
+                    .Table<Account>()
+                    .Update(LoggedInAccount);
 
+                Debug.WriteLine("[UpdateUserCompanyAsync] Update successful");
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[UpdateUserCompanyAsync] Exception: {ex.Message}");
                 return false;
             }
         }
+
         public void Logout()
         {
+            Debug.WriteLine($"[Logout] Logging out user: {LoggedInAccount?.Email ?? "None"}");
             LoggedInAccount = null;
         }
     }

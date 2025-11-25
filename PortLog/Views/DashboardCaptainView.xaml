@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="PortLog.Views.DashboardCaptainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="#6C757D" Padding="20" Grid.Row="0">
+            <Grid>
+                <TextBlock Text="Member Dashboard" 
+                          FontSize="24" FontWeight="Bold" 
+                          Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="Logout" 
+                       Command="{Binding LogoutCommand}"
+                       HorizontalAlignment="Right"
+                       Background="#DC3545"/>
+            </Grid>
+        </Border>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
+                <Border Background="White" CornerRadius="10" Padding="30" Margin="0,0,0,20">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="{Binding WelcomeMessage}" 
+                                  FontSize="20" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding CompanyInfo}" 
+                                  FontSize="16" Foreground="Gray"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Dashboard Cards -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Background="White" CornerRadius="10" Padding="20" 
+                           Margin="0,0,10,0" Grid.Column="0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="My Tasks" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBlock Text="View and manage your assigned tasks and projects." 
+                                      TextWrapping="Wrap" Foreground="Gray"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="10" Padding="20" 
+                           Margin="10,0,0,0" Grid.Column="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="Team" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBlock Text="View team members and collaborate on projects." 
+                                      TextWrapping="Wrap" Foreground="Gray"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Border Background="#E3F2FD" CornerRadius="10" Padding="20" Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock Text="✓ Member Access" 
+                                  FontSize="16" FontWeight="SemiBold" Foreground="#1565C0"/>
+                        <TextBlock Text="You have access to your tasks and team collaboration features." 
+                                  Foreground="#1565C0" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

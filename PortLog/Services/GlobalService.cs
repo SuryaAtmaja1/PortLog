@@ -1,12 +1,25 @@
-﻿namespace PortLog.Services
+﻿using System;
+using System.Collections.Generic;
+
+namespace PortLog.Services
 {
     public static class GlobalServices
     {
-        public static AccountService Account { get; private set; }
+        private static readonly Dictionary<Type, object> _services = new();
+
+        public static void Register<T>(T service)
+        {
+            _services[typeof(T)] = service!;
+        }
+
+        public static T Get<T>()
+        {
+            return (T)_services[typeof(T)];
+        }
 
         public static void Init()
         {
-            Account = new AccountService();
+            // Register any static/global app-wide services here.
         }
     }
 }

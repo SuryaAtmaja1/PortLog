@@ -24,5 +24,20 @@ namespace PortLog.Views
         {
             InitializeComponent();
         }
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null && sender is PasswordBox passwordBox)
+            {
+                ((dynamic)DataContext).Password = passwordBox.Password;
+            }
+        }
+
+        private void ConfirmPasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null && sender is PasswordBox passwordBox)
+            {
+                ((dynamic)DataContext).ConfirmPassword = passwordBox.Password;
+            }
+        }
     }
 }

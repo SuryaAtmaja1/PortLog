@@ -1,10 +1,8 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Threading.Tasks;
-using System.Windows;
-using DotNetEnv;
-using Supabase;
+﻿using System.Windows;
+using PortLog.Supabase;
 using PortLog.Services;
+using PortLog.Views;
+using PortLog.ViewModels;
 
 namespace PortLog;
 
@@ -14,20 +12,18 @@ namespace PortLog;
 /// 
 public partial class App : Application
 {
-    SupabaseService Service;
     protected override async void OnStartup(StartupEventArgs e)
     {
-        //DotNetEnv.Env.Load();
-
         base.OnStartup(e);
 
         await SupabaseClient.InitAsync();
-        Service = new SupabaseService(SupabaseClient.Instance);
+
+        var supabaseService = new SupabaseService(SupabaseClient.Instance);
+        GlobalServices.Register(supabaseService);
         GlobalServices.Init();
 
-        // Lanjut buka window pertama
-        //var main = new MainWindow();
-        //main.Show();
+        var mainWindow = new MainWindow();
+        mainWindow.DataContext = new MainViewModel();
+        mainWindow.Show();
     }
 }
-

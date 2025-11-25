@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Supabase;
-using PortLog.Models;
+﻿using Supabase;
+using Supabase.Postgrest.Interfaces;
+using Supabase.Postgrest.Models;
 
-public class SupabaseService
+namespace PortLog.Supabase
 {
-    private readonly Supabase.Client _client;
-
-    public SupabaseService(Supabase.Client client)
+    public class SupabaseService
     {
-        _client = client;
+        private readonly Client _client;
+
+        public SupabaseService(Client client)
+        {
+            _client = client;
+        }
+        public IPostgrestTable<T> Table<T>()
+            where T : BaseModel, new()
+        {
+            return _client.From<T>();
+        }
+        public Client Client => _client;
     }
 }
-

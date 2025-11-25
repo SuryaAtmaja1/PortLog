@@ -1,11 +1,11 @@
 ﻿using PortLog.Commands;
 using PortLog.Services;
-using PortLog.Models;
 using System.Windows.Input;
+using PortLog.Models;
 
 namespace PortLog.ViewModels
 {
-    public class DashboardCaptainViewModel : BaseViewModel
+    public class DashboardManagerViewModel : BaseViewModel
     {
         private readonly NavigationService _navigationService;
         private readonly AccountService _accountService;
@@ -13,7 +13,7 @@ namespace PortLog.ViewModels
         private string _companyInfo = "Loading...";
         public string CompanyInfo => _companyInfo;
 
-        public string WelcomeMessage => $"Welcome, {_accountService.LoggedInAccount?.Name ?? "User"} (CAPTAIN)";
+        public string WelcomeMessage => $"Welcome, {_accountService.LoggedInAccount?.Name ?? "User"} (MANAGER)";
         public async Task LoadCompanyInfoAsync()
         {
             if (_accountService.LoggedInAccount?.CompanyId != null)
@@ -34,7 +34,7 @@ namespace PortLog.ViewModels
 
         public ICommand LogoutCommand { get; }
 
-        public DashboardCaptainViewModel(NavigationService navigationService, AccountService accountService)
+        public DashboardManagerViewModel(NavigationService navigationService, AccountService accountService)
         {
             _navigationService = navigationService;
             _accountService = accountService;

@@ -4,91 +4,118 @@
              xmlns:views="clr-namespace:PortLog.Views"
              xmlns:vm="clr-namespace:PortLog.ViewModels"
              xmlns:conv="clr-namespace:PortLog.Converters"
-             xmlns:help="clr-namespace:PortLog.Helpers"
-             StartupUri="MainWindow.xaml">
+             xmlns:help="clr-namespace:PortLog.Helpers">
 
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Add external resource dictionaries here -->
+                <ResourceDictionary Source="Styles/Button.xaml"/>
+                <ResourceDictionary Source="Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="Styles/PasswordBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-            <conv:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
-
-            <conv:MenuActiveConverter x:Key="MenuActiveConverter"/>
-
+            <!-- Converters -->
             <conv:ActiveMenuConverter x:Key="ActiveMenuConverter"/>
+            <conv:MenuActiveConverter x:Key="MenuActiveConverter"/>
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <conv:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+            <conv:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
+            <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 
-            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
-                <views:LoginView/>
-            </DataTemplate>
+            <!-- Global Styles -->
+            <!-- Textbox -->
+            <Style TargetType="TextBox">
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="Margin" Value="0,5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                <Setter Property="BorderThickness" Value="1"/>  
+                <Setter Property="Background" Value="White"/>
+            </Style>
 
-            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
-                <views:DashboardView/>
-            </DataTemplate>
+            <!-- Button -->
+            <Style TargetType="Button">
+                <Setter Property="Padding" Value="15,8"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Background" Value="#EAF3F3"/>
+                <Setter Property="Foreground" Value="#000000"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#D1EDEA"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
-            <DataTemplate DataType="{x:Type vm:DashboardHomeViewModel}">
-                <views:DashboardHomeView/>
-            </DataTemplate>
+            <!-- Label -->
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
 
-            <DataTemplate DataType="{x:Type vm:CompanyManagementViewModel}">
-                <views:CompanyManagementView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:FleetViewModel}">
-                <views:FleetView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:ShipViewModel}">
-                <views:ShipView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:VoyageListViewModel}">
-                <views:VoyageListView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:InsightViewModel}">
-                <views:InsightView/>
-            </DataTemplate>
-
-
+            <!-- Nav Button Style -->
             <Style x:Key="NavButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="Padding" Value="10"/>
-                <Setter Property="Margin" Value="0 6"/>
+                <Setter Property="Margin" Value="0,6"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Cursor" Value="Hand"/>
-
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="bd"
-                        CornerRadius="10"
-                        Background="{TemplateBinding Background}"
-                        Padding="{TemplateBinding Padding}">
+                                    CornerRadius="10"
+                                    Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}">
                                 <ContentPresenter/>
                             </Border>
-
                             <ControlTemplate.Triggers>
-
-                                <!-- Hover -->
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="bd" Property="Background" Value="#0D353A"/>
                                 </Trigger>
-
-                                <!-- ACTIVE MENU -->
                                 <Trigger Property="help:NavigationHelper.IsActive" Value="True">
                                     <Setter TargetName="bd" Property="Background" Value="White"/>
                                     <Setter Property="Foreground" Value="Black"/>
                                 </Trigger>
-
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <!-- DataTemplates -->
+            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+                <views:DashboardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DashboardHomeViewModel}">
+                <views:DashboardHomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CompanyManagementViewModel}">
+                <views:CompanyManagementView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:FleetViewModel}">
+                <views:FleetView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ShipViewModel}">
+                <views:ShipView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:VoyageListViewModel}">
+                <views:VoyageListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:InsightViewModel}">
+                <views:InsightView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
-    
-    

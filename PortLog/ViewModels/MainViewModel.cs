@@ -1,39 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PortLog.Services;
+using PortLog.Supabase;
 
 namespace PortLog.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
-        private object _currentView;
-        public object CurrentView
-        {
-            get => _currentView;
-            set { _currentView = value; OnPropertyChanged(nameof(CurrentView)); }
-        }
+        private BaseViewModel _currentViewModel;
 
-        public LoginViewModel LoginVM { get; }
-        public DashboardViewModel DashboardVM { get; }
+        public NavigationService NavigationService { get; }
+        public SupabaseService SupabaseService { get; }
+        public AccountService AccountService { get; }
+        public CompanyService CompanyService { get; }
+
+        public BaseViewModel CurrentViewModel
+        {
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value);
+        }
 
         public MainViewModel()
         {
-            LoginVM = new LoginViewModel(this);
-            DashboardVM = new DashboardViewModel();
+            // 1. Create a single shared SupabaseService instance
+            SupabaseService = GlobalServices.Get<SupabaseService>();
 
-            CurrentView = LoginVM;
+            // 2. Inject it into your business services
+            AccountService = new AccountService(SupabaseService);
+            CompanyService = new CompanyService(SupabaseService);
+
+            // 3. Navigation needs this MainViewModel
+            NavigationService = new NavigationService(this);
+
+            // 4. Start app at Login
+            CurrentViewModel = new LoginViewModel(NavigationService, AccountService);
         }
-
-        public void NavigateToDashboard()
-        {
-            CurrentView = DashboardVM;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
