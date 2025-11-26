@@ -1,0 +1,79 @@
+﻿<Window x:Class="PortLog.Views.DetailShipView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ship Detail"
+        Height="600" Width="520"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#F8F8F8"
+        SizeToContent="Height">
+
+    <Grid Margin="20">
+        <StackPanel>
+
+            <!-- Title -->
+            <TextBlock Text="Ship Detail"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Margin="0 0 0 20"/>
+
+            <!-- NAME -->
+            <TextBlock Text="Name" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Name}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+            <TextBox Text="{Binding EditName}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <!-- TYPE -->
+            <TextBlock Text="Type" Margin="0 10 0 0" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Type}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+            <ComboBox ItemsSource="{Binding ShipTypes}"
+                      SelectedItem="{Binding EditType}"
+                      Visibility="{Binding IsEditing, 
+                      Converter={StaticResource BoolToVisibilityConverter}}"
+                      Width="200"
+                      HorizontalAlignment="Left"/>
+
+
+            <!-- CAPACITY -->
+            <TextBlock Text="Capacity" Margin="0 10 0 0" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Capacity}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
+            <TextBox Text="{Binding EditCapacity}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <!-- CAPTAIN -->
+            <TextBlock Text="Captain" Margin="0 10 0 0" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding CaptainName}"/>
+
+            <!-- LAST VOYAGE -->
+            <TextBlock Text="Last Voyage" Margin="0 10 0 0" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding LastVoyage}"/>
+
+            <!-- BUTTON BAR -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0" >
+
+                <Button Content="Edit"
+                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"
+                        Width="80"
+                        Margin="5"
+                        Command="{Binding EditCommand}"/>
+
+                <Button Content="Save"
+                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Width="80"
+                        Margin="5"
+                        Command="{Binding SaveCommand}"/>
+
+                <Button Content="Cancel"
+                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Width="80"
+                        Margin="5"
+                        Command="{Binding CancelCommand}"/>
+
+                <Button Content="Close"
+                        Width="80"
+                        Margin="5"
+                        Click="Close_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+
+</Window>

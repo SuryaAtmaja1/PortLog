@@ -1,12 +1,14 @@
-﻿using System.Windows.Input;
-using PortLog.Commands;      // RelayCommand
+﻿using PortLog.Commands;      // RelayCommand
 using PortLog.Enumerations;
-using PortLog.Supabase;
 using PortLog.Services;
- 
+using PortLog.Supabase;
+using System.ComponentModel;
+using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace PortLog.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private readonly NavigationService _navigationService;
         private readonly AccountService _accountService;
@@ -17,19 +19,19 @@ namespace PortLog.ViewModels
         public string Username
         {
             get => _username;
-            set => SetProperty(ref _username, value);
+            set { _username = value; OnPropertyChanged(nameof(Username)); }
         }
 
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value);
+            set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
 
         public string ErrorMessage
         {
             get => _errorMessage;
-            set => SetProperty(ref _errorMessage, value);
+            set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
         }
 
         public ICommand LoginCommand { get; }
@@ -58,7 +60,7 @@ namespace PortLog.ViewModels
                 // Navigate to appropriate dashboard based on role
                 if (_accountService.LoggedInAccount?.RoleEnum == AccountRole.MANAGER)
                 {
-                    _navigationService.NavigateTo(new DashboardManagerViewModel(_navigationService, _accountService));
+                    _navigationService.NavigateTo(new DashboardViewModel(_navigationService, _accountService));
                 }
                 else
                 {
@@ -70,6 +72,10 @@ namespace PortLog.ViewModels
                 ErrorMessage = error;
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private void NavigateToRegister()
         {

@@ -1,7 +1,97 @@
 ﻿<UserControl x:Class="PortLog.Views.VoyageListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <TextBlock Text="Voyage List View"
-               FontSize="32"
-               Margin="20"/>
+
+    <Grid Margin="20">
+
+        <StackPanel>
+
+            <!-- Title -->
+            <TextBlock Text="Voyage"
+                       FontWeight="Bold"
+                       FontFamily="Plus Jakarta Sans"
+                       FontSize="32"
+                       Margin="0 0 0 20"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20" VerticalAlignment="Center" >
+
+                <!-- START DATE -->
+                <StackPanel Margin="0 0 10 0">
+                    <TextBlock Text="Start Date"
+                   FontSize="14"
+                   FontWeight="SemiBold"
+                   Margin="0 0 0 5"/>
+                    <DatePicker SelectedDate="{Binding StartDate}"
+                    Width="140"
+                    Tag="Start date"
+                    Height="28"/>
+                </StackPanel>
+
+                <TextBlock Text="→" FontSize="20" VerticalAlignment="Bottom" Margin="0 10 10 0"/>
+
+                <!-- END DATE -->
+                <StackPanel Margin="0 0 10 0">
+                    <TextBlock Text="End Date"
+                   FontSize="14"
+                   FontWeight="SemiBold"
+                   Margin="0 0 0 5"/>
+                    <DatePicker SelectedDate="{Binding EndDate}"
+                    Width="140"
+                    Tag="End date"
+                    Height="28"/>
+                </StackPanel>
+
+                <!-- BUTTON CARI -->
+                <Button Content="Cari"
+                Width="80"
+                Height="28"
+                VerticalAlignment="Bottom"
+                Padding="0"
+                Command="{Binding SearchCommand}"
+                Background="#8BC6EC"
+                Foreground="White"
+                FontWeight="Bold"
+                BorderThickness="0"/>
+
+            </StackPanel>
+
+
+            <!-- DATAGRID -->
+            <DataGrid ItemsSource="{Binding Voyages}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Height="400"
+                      RowHeight="40"
+                      FontSize="14"
+                      GridLinesVisibility="None">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Departure Time"
+                                        Binding="{Binding DepartureTime, StringFormat=\{0:dd MMM yyyy HH:mm\}}"
+                                        Width="150"/>
+
+                    <DataGridTextColumn Header="Arrival Time"
+                                        Binding="{Binding ArrivalTime, StringFormat=\{0:dd MMM yyyy HH:mm\}}"
+                                        Width="150"/>
+
+                    <DataGridTextColumn Header="Departure Port"
+                                        Binding="{Binding DeparturePort}" Width="150"/>
+
+                    <DataGridTextColumn Header="Arrival Port"
+                                        Binding="{Binding ArrivalPort}" Width="150"/>
+
+                    <DataGridTextColumn Header="Ship Name"
+                                        Binding="{Binding ShipName}" Width="150"/>
+
+                    <DataGridTextColumn Header="Revenue (IDR)"
+                                        Binding="{Binding Revenue, StringFormat=N0}" Width="150"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </StackPanel>
+
+    </Grid>
+
 </UserControl>

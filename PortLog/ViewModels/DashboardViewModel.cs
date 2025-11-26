@@ -1,17 +1,47 @@
 ﻿using PortLog.Commands;
-using System;
-using System.Collections.Generic;
+using PortLog.Services;
+using PortLog.Supabase;
 using System.ComponentModel;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+//using System.Windows.Navigation;
 
 namespace PortLog.ViewModels
 {
-    public class DashboardViewModel : INotifyPropertyChanged
+    public class DashboardViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        private readonly NavigationService _navigationService;
+        private readonly AccountService _accountService;
+
+        // Constructor baru yang sesuai pola NavigationService
+        public DashboardViewModel(NavigationService navigationService, AccountService accountService)
+        {
+            _navigationService = navigationService;
+            _accountService = accountService;
+
+            NavigateCommand = new RelayCommand(OnNavigate);
+
+            HomeVM = new DashboardHomeViewModel(
+                navigationService.MainViewModel.SupabaseService,
+                navigationService.MainViewModel.AccountService
+            );
+
+            FleetVM = new FleetViewModel(
+                navigationService.MainViewModel.SupabaseService,
+                navigationService.MainViewModel.AccountService
+            );
+
+            VoyageVM = new VoyageListViewModel(
+                navigationService.MainViewModel.SupabaseService,
+                navigationService.MainViewModel.AccountService
+            );
+
+            // Default Page
+            SelectedMenu = "Home";
+            CurrentPage = HomeVM;
+
+            LogoutCommand = new RelayCommand(Logout);
+        }
+
         public ICommand NavigateCommand { get; }
 
         private object currentPage;
@@ -22,27 +52,20 @@ namespace PortLog.ViewModels
         }
 
         // ViewModel Halaman
-        public DashboardHomeViewModel HomeVM { get; } = new();
+        public DashboardHomeViewModel HomeVM { get; }
         public CompanyManagementViewModel CompanyVM { get; } = new();
-        public FleetViewModel FleetVM { get; } = new();
+        public FleetViewModel FleetVM { get; }
         public ShipViewModel ShipVM { get; } = new();
-        public VoyageListViewModel VoyageVM { get; } = new();
+        public VoyageListViewModel VoyageVM { get; }
         public InsightViewModel InsightVM { get; } = new();
+
+        public ICommand LogoutCommand { get; }
 
         private string selectedMenu;
         public string SelectedMenu
         {
             get => selectedMenu;
             set { selectedMenu = value; OnPropertyChanged(nameof(SelectedMenu)); }
-        }
-
-        public DashboardViewModel()
-        {
-            NavigateCommand = new RelayCommand(OnNavigate);
-
-            // Default halaman
-            SelectedMenu = "Home";
-            CurrentPage = HomeVM;
         }
 
         private void OnNavigate(object parameter)
@@ -53,23 +76,30 @@ namespace PortLog.ViewModels
             {
                 case "Home":
                     CurrentPage = HomeVM;
+                    HomeVM.OnNavigatedTo();
                     break;
                 case "Company":
                     CurrentPage = CompanyVM;
+                    //CompanyVM.OnNavigatedTo();
                     break;
                 case "Fleet":
                     CurrentPage = FleetVM;
-                    break;
-                case "Ship":
-                    CurrentPage = ShipVM;
+                    FleetVM.OnNavigatedTo();
                     break;
                 case "Voyage":
                     CurrentPage = VoyageVM;
+                    //VoyageVM.OnNavigatedTo();
                     break;
                 case "Insight":
                     CurrentPage = InsightVM;
+                    //InsightVM.OnNavigatedTo();
                     break;
             }
+        }
+        private void Logout(object parameter)
+        {
+            _accountService.Logout();
+            _navigationService.NavigateTo(new LoginViewModel(_navigationService, _accountService));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

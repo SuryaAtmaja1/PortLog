@@ -1,10 +1,11 @@
 using PortLog.Enumerations;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace PortLog.Models
 {
+    [Table("voyage_log")]
     public class VoyageLog : BaseModel
     {
         [PrimaryKey("id")]
@@ -36,12 +37,12 @@ namespace PortLog.Models
         public double AverageFuelConsumption { get; set; }
 
         [Column("revenue_idr_cents")]
-        public long Revenue { get; set; }
+        public long? Revenue { get; set; }
 
         [JsonIgnore]
         public decimal RevenueIdr
         {
-            get => Revenue / 100m;
+            get => (Revenue ?? 0) / 100m;
             set => Revenue = (long)(value * 100);
         }
     }

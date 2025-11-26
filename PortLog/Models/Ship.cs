@@ -1,10 +1,11 @@
 using PortLog.Enumerations;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace PortLog.Models
 {
+    [Table("ship")]
     public class Ship : BaseModel
     {
         [PrimaryKey("id")]
@@ -34,6 +35,13 @@ namespace PortLog.Models
         {
             get => Enum.TryParse<ShipType>(Type, out var type) ? type : ShipType.MULTI_PURPOSE_VESSEL;
             set => Type = value.ToString();
+        }
+
+        [JsonIgnore]
+        public ShipStatus StatusEnum
+        {
+            get => Enum.TryParse<ShipStatus>(Status, out var s) ? s : ShipStatus.STANDBY;
+            set => Status = value.ToString();
         }
     }
 }

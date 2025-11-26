@@ -4,10 +4,6 @@
              xmlns:help="clr-namespace:PortLog.Helpers"
              xmlns:vm="clr-namespace:PortLog.ViewModels">
 
-    <UserControl.DataContext>
-        <vm:DashboardViewModel/>
-    </UserControl.DataContext>
-    
     <Grid>
         <!-- LAYOUT: 2 Kolom -->
         <Grid.ColumnDefinitions>
@@ -52,13 +48,6 @@
                         help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Fleet}"
                         Style="{StaticResource NavButtonStyle}"/>
 
-                <Button Content="Ship"
-                        Command="{Binding NavigateCommand}"
-                        CommandParameter="Ship"
-                        Tag="Ship"
-                        help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Ship}"
-                        Style="{StaticResource NavButtonStyle}"/>
-
                 <Button Content="Voyage List"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="Voyage"
@@ -71,6 +60,9 @@
                         CommandParameter="Insight"
                         Tag="Insight"
                         help:NavigationHelper.IsActive="{Binding SelectedMenu, Converter={StaticResource ActiveMenuConverter}, ConverterParameter=Insight}"
+                        Style="{StaticResource NavButtonStyle}"/>
+                <Button Content="Logout"
+                        Command="{Binding LogoutCommand}"
                         Style="{StaticResource NavButtonStyle}"/>
             </StackPanel>
         </Border>

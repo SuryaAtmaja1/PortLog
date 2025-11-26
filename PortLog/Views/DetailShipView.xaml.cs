@@ -15,18 +15,17 @@ using System.Windows.Shapes;
 namespace PortLog.Views
 {
     /// <summary>
-    /// Interaction logic for VoyageListView.xaml
+    /// Interaction logic for DetailShipView.xaml
     /// </summary>
-    public partial class VoyageListView : UserControl
+    public partial class DetailShipView : Window
     {
-        public VoyageListView()
+        public DetailShipView()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

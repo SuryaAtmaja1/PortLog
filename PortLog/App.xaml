@@ -4,7 +4,8 @@
              xmlns:views="clr-namespace:PortLog.Views"
              xmlns:vm="clr-namespace:PortLog.ViewModels"
              xmlns:conv="clr-namespace:PortLog.Converters"
-             xmlns:help="clr-namespace:PortLog.Helpers">
+             xmlns:help="clr-namespace:PortLog.Helpers"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -30,7 +31,7 @@
                 <Setter Property="Margin" Value="0,5"/>
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="BorderBrush" Value="#CCCCCC"/>
-                <Setter Property="BorderThickness" Value="1"/>  
+                <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Background" Value="White"/>
             </Style>
 
@@ -118,4 +119,5 @@
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
+
 </Application>

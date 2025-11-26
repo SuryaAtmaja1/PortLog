@@ -28,6 +28,9 @@
         <DataTemplate DataType="{x:Type vm:DashboardCaptainViewModel}">
             <views:DashboardCaptainView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:DashboardView/>
+        </DataTemplate>
     </Window.Resources>
 
     <ContentControl Content="{Binding CurrentViewModel}"/>

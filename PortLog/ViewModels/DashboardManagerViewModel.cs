@@ -2,10 +2,11 @@
 using PortLog.Services;
 using System.Windows.Input;
 using PortLog.Models;
+using System.ComponentModel;
 
 namespace PortLog.ViewModels
 {
-    public class DashboardManagerViewModel : BaseViewModel
+    public class DashboardManagerViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private readonly NavigationService _navigationService;
         private readonly AccountService _accountService;
