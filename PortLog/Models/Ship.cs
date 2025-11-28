@@ -8,8 +8,8 @@ namespace PortLog.Models
     [Table("ship")]
     public class Ship : BaseModel
     {
-        [PrimaryKey("id")]
-        [Column("id")]
+        [PrimaryKey("id", shouldInsert: false)]
+        [Column("id", ignoreOnInsert:true)]
         public long Id { get; set; }
 
         [Column("company_id")]

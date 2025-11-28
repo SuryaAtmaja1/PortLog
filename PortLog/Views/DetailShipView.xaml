@@ -221,18 +221,42 @@
                 <!-- CAPTAIN -->
                 <StackPanel Grid.Row="3" Margin="0 0 0 20">
                     <TextBlock Text="CAPTAIN" 
-                               FontWeight="SemiBold" 
-                               FontSize="11"
-                               Foreground="#666666"
-                               Margin="0 0 0 8"/>
-                    <StackPanel Orientation="Horizontal">
+               FontWeight="SemiBold" 
+               FontSize="11"
+               Foreground="#666666"
+               Margin="0 0 0 8"/>
+
+                    <!-- READ MODE -->
+                    <StackPanel Orientation="Horizontal"
+                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
                         <TextBlock Text="👤" FontSize="16" Margin="0 0 8 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding CaptainName}" 
-                                   FontSize="16"
-                                   Foreground="#1A1A1A"
-                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding CaptainName}"
+                   FontSize="16"
+                   Foreground="#1A1A1A"
+                   VerticalAlignment="Center"/>
                     </StackPanel>
+
+                    <!-- EDIT MODE -->
+                    <ComboBox ItemsSource="{Binding Captains}"
+              SelectedItem="{Binding EditCaptain}"
+              Style="{StaticResource ModernComboBox}"
+              Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="0 0 0 0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} ({1})">
+                                            <Binding Path="Name"/>
+                                            <Binding Path="Email"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
+
 
                 <!-- LAST VOYAGE -->
                 <StackPanel Grid.Row="4" Margin="0 0 0 20">

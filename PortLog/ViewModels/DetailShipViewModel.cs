@@ -1,9 +1,11 @@
 ﻿using PortLog.Commands;
 using PortLog.Enumerations;
 using PortLog.Models;
+using PortLog.Services;
 using PortLog.Supabase;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace PortLog.ViewModels
     public class DetailShipViewModel : BaseViewModel
     {
         private readonly SupabaseService _supabase;
+        private readonly AccountService _accountService;
         public long ShipId { get; }
 
         // READ-ONLY Properties
@@ -38,6 +41,15 @@ namespace PortLog.ViewModels
         public bool IsEditing { get => _isEditing; set => SetProperty(ref _isEditing, value); }
         private bool _isEditing;
 
+        public ObservableCollection<Account> Captains { get; } = new();
+
+        private Account _editCaptain;
+        public Account EditCaptain
+        {
+            get => _editCaptain;
+            set => SetProperty(ref _editCaptain, value);
+        }
+
         public ICommand EditCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
@@ -47,10 +59,12 @@ namespace PortLog.ViewModels
         public event Action DataChanged;
 
         private Ship _ship;
+        public Guid CaptainId => _ship?.CaptainId ?? Guid.Empty;
 
-        public DetailShipViewModel(SupabaseService supabase, long shipId)
+        public DetailShipViewModel(SupabaseService supabase, long shipId, AccountService accountService)
         {
             _supabase = supabase;
+            _accountService = accountService;
             ShipId = shipId;
 
             EditCommand = new RelayCommand(_ => EnterEditMode());
@@ -60,6 +74,7 @@ namespace PortLog.ViewModels
             IsEditing = false;
 
             _ = LoadData();
+            _ = LoadCaptains();
         }
 
         private async Task LoadData()
@@ -129,10 +144,14 @@ namespace PortLog.ViewModels
 
         private async Task Save()
         {
-            // update ship
+            if (EditCaptain == null)
+                return;
+
             _ship.Name = EditName;
             _ship.Type = EditType;
             _ship.PassengerCapacity = EditCapacity;
+
+            _ship.CaptainId = EditCaptain.Id;
 
             await _supabase.Table<Ship>().Update(_ship);
 
@@ -140,14 +159,32 @@ namespace PortLog.ViewModels
             Name = _ship.Name;
             Type = _ship.Type;
             Capacity = _ship.PassengerCapacity;
+            CaptainName = EditCaptain.Name;
 
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Type));
             OnPropertyChanged(nameof(Capacity));
+            OnPropertyChanged(nameof(CaptainName));
 
             IsEditing = false;
 
             DataChanged?.Invoke();
+        }
+
+
+        private async Task LoadCaptains()
+        {
+            Captains.Clear();
+
+            var res = await _supabase.Table<Account>()
+                .Filter("company_id", Operator.Equals, _accountService.LoggedInAccount.CompanyId.ToString())
+                .Filter("account_role", Operator.Equals, "CAPTAIN")
+                .Get();
+
+            foreach (var c in res.Models)
+                Captains.Add(c);
+
+            EditCaptain = Captains.FirstOrDefault(c => c.Id == CaptainId);
         }
     }
 

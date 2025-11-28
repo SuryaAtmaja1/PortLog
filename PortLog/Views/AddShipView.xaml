@@ -1,0 +1,162 @@
+﻿<Window x:Class="PortLog.Views.AddShipView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Ship"
+        Width="560"
+        Height="520"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#F8F9FA">
+
+    <Window.Resources>
+        <!-- Shadow Effect -->
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="20"
+                          ShadowDepth="3"
+                          Opacity="0.15"
+                          Color="#000000"/>
+
+        <!-- BUTTON STYLES -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#0081A7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#666"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Inputs -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="12 10"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="12 10"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+
+
+    <!-- WRAP EVERYTHING IN SCROLLVIEWER -->
+    <Border Background="White"
+            CornerRadius="16"
+            Margin="30"
+            Padding="35"
+            Effect="{StaticResource CardShadow}">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel>
+
+                <!-- HEADER -->
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
+                    <TextBlock Text="🆕" FontSize="42" Margin="0 0 15 0"/>
+                    <StackPanel>
+                        <TextBlock Text="Add New Ship"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="#1A1A1A"/>
+                        <TextBlock Text="Register a new vessel into your fleet"
+                                   FontSize="13"
+                                   Foreground="#666"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- FORM -->
+                <StackPanel>
+
+                    <!-- NAME -->
+                    <TextBlock Text="SHIP NAME" FontWeight="SemiBold" FontSize="11" Foreground="#666" Margin="0 0 0 6"/>
+                    <TextBox Text="{Binding NewName}" Style="{StaticResource ModernTextBox}" Margin="0 0 0 20"/>
+
+                    <!-- TYPE -->
+                    <TextBlock Text="TYPE" FontWeight="SemiBold" FontSize="11" Foreground="#666" Margin="0 0 0 6"/>
+                    <ComboBox ItemsSource="{Binding ShipTypes}"
+                              SelectedItem="{Binding NewType}"
+                              Style="{StaticResource ModernComboBox}"
+                              Margin="0 0 0 20"/>
+
+                    <!-- PASSENGER CAPACITY -->
+                    <TextBlock Text="PASSENGER CAPACITY" FontWeight="SemiBold" FontSize="11" Foreground="#666" Margin="0 0 0 6"/>
+                    <TextBox Text="{Binding NewCapacity}" Style="{StaticResource ModernTextBox}" Margin="0 0 0 20"/>
+
+                    <!-- CAPTAIN -->
+                    <TextBlock Text="CAPTAIN" FontWeight="SemiBold" FontSize="11" Foreground="#666" Margin="0 0 0 6"/>
+                    <ComboBox ItemsSource="{Binding Captains}"
+                              SelectedItem="{Binding SelectedCaptain}"
+                              Style="{StaticResource ModernComboBox}"
+                              Margin="0 0 0 20">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} ({1})">
+                                            <Binding Path="Name"/>
+                                            <Binding Path="Email"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                </StackPanel>
+
+                <!-- BUTTONS -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 15 0 0">
+                    <Button Content="Save" Style="{StaticResource PrimaryButton}" Width="120"
+                            Command="{Binding SaveCommand}" Margin="0 0 10 0"/>
+
+                    <Button Content="Cancel" Style="{StaticResource SecondaryButton}" Width="120"
+                            Click="Close_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
+    </Border>
+
+</Window>

@@ -51,16 +51,52 @@ namespace PortLog.ViewModels
         public ICommand AddCrewCommand { get; }
         public ICommand RemoveCrewCommand { get; }
 
+        public bool IsConfirmOpen { get => _isConfirmOpen; set => SetProperty(ref _isConfirmOpen, value); }
+        private bool _isConfirmOpen;
+
+        public string ConfirmTitle { get => _confirmTitle; set => SetProperty(ref _confirmTitle, value); }
+        private string _confirmTitle;
+
+        public string ConfirmMessage { get => _confirmMessage; set => SetProperty(ref _confirmMessage, value); }
+        private string _confirmMessage;
+
+        public ICommand ConfirmCommand { get; }
+        public ICommand CancelCommand { get; }
+
+        public ICommand AskRemoveCrewCommand { get; }
+
+        private Guid _pendingRemoveId;
+
         public ManageCrewViewModel(SupabaseService supabase, AccountService accountService)
         {
             _supabase = supabase;
             _accountService = accountService;
 
             AddCrewCommand = new RelayCommand(async _ => await AddCrew());
-            RemoveCrewCommand = new RelayCommand(async id => await RemoveCrew((Guid)id));
+            //RemoveCrewCommand = new RelayCommand(async id => await RemoveCrew((Guid)id));
+            AskRemoveCrewCommand = new RelayCommand(id => AskRemoveCrew((Guid)id));
+
+            ConfirmCommand = new RelayCommand(async _ => await ConfirmRemove());
+            CancelCommand = new RelayCommand(_ => IsConfirmOpen = false);
+
 
             _ = LoadCrew();
         }
+
+        private void AskRemoveCrew(Guid id)
+        {
+            _pendingRemoveId = id;
+            ConfirmTitle = "Remove Crew";
+            ConfirmMessage = "Are you sure you want to remove this crew?";
+            IsConfirmOpen = true;
+        }
+        private async Task ConfirmRemove()
+        {
+            IsConfirmOpen = false;
+            await RemoveCrew(_pendingRemoveId);
+        }
+
+
 
         private async Task LoadCrew()
         {

@@ -41,6 +41,8 @@ namespace PortLog.ViewModels
 
         public ICommand DetailCommand { get; }
 
+        public ICommand OpenAddShipCommand { get; }
+
         public void OnNavigatedTo() => _ = LoadData();
 
         public FleetViewModel(SupabaseService supabase, AccountService accountService)
@@ -48,15 +50,16 @@ namespace PortLog.ViewModels
             _supabase = supabase;
             _accountService = accountService;
 
-            _ = LoadData(); 
+            //_ = LoadData(); 
 
             DetailCommand = new RelayCommand(ShowDetail);
+            OpenAddShipCommand = new RelayCommand(_ => OpenAddShip());
         }
         private void ShowDetail(object shipIdObj)
         {
             if (shipIdObj is long shipId)
             {
-                var detailVM = new DetailShipViewModel(_supabase, shipId);
+                var detailVM = new DetailShipViewModel(_supabase, shipId, _accountService);
 
                 // listen to data changed
                 detailVM.DataChanged += async () =>
@@ -73,6 +76,19 @@ namespace PortLog.ViewModels
                 window.ShowDialog();
             }
         }
+        private void OpenAddShip()
+        {
+            var win = new AddShipView
+            {
+                DataContext = new AddShipViewModel(_supabase, _accountService),
+                Owner = Application.Current.MainWindow
+            };
+
+            win.ShowDialog();
+
+            _ = LoadData(); // refresh
+        }
+
         private async Task LoadData()
         {
             Fleets.Clear();

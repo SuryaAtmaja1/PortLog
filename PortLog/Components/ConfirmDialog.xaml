@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="PortLog.Components.ConfirmDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root"
+             Visibility="{Binding IsOpen, ElementName=Root, Converter={StaticResource BoolToVisibilityConverter}}">
+
+    <UserControl.Resources>
+        <!-- Shadow Effect -->
+        <DropShadowEffect x:Key="DialogShadow"
+                          BlurRadius="30"
+                          ShadowDepth="5"
+                          Opacity="0.3"
+                          Color="#000000"/>
+
+        <!-- Danger Button Style -->
+        <Style x:Key="DangerButton" TargetType="Button">
+            <Setter Property="Background" Value="#DC3545"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#c82333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Secondary Button Style -->
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F5F5F5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#90000000">
+        <!-- Semi-transparent overlay with animation -->
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0" To="1"
+                                         Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Border Background="White"
+                CornerRadius="16"
+                Padding="35"
+                MaxWidth="420"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Effect="{StaticResource DialogShadow}">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Border.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                             From="0.9" To="1"
+                                             Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                             From="0.9" To="1"
+                                             Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <Border.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1" CenterX="210" CenterY="100"/>
+            </Border.RenderTransform>
+
+            <StackPanel>
+                <!-- Icon Warning -->
+                <Border Width="60" Height="60"
+                        Background="#FFE5E5"
+                        CornerRadius="30"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 20">
+                    <TextBlock Text="⚠️"
+                               FontSize="32"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- Title -->
+                <TextBlock Text="{Binding Title, ElementName=Root}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#1A1A1A"
+                           TextAlignment="Center"
+                           Margin="0 0 0 12"/>
+
+                <!-- Message -->
+                <TextBlock Text="{Binding Message, ElementName=Root}"
+                           FontSize="14"
+                           Foreground="#666666"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           LineHeight="22"
+                           Margin="0 0 0 30"/>
+
+                <!-- Divider -->
+                <Border Height="1" 
+                        Background="#E0E0E0" 
+                        Margin="0 0 0 25"/>
+
+                <!-- Buttons -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="Cancel"
+                            Style="{StaticResource SecondaryButton}"
+                            Margin="0 0 12 0"
+                            Width="100"
+                            Command="{Binding CancelCommand, ElementName=Root}"/>
+                    <Button Content="Confirm"
+                            Style="{StaticResource DangerButton}"
+                            Width="100"
+                            Command="{Binding ConfirmCommand, ElementName=Root}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

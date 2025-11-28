@@ -124,7 +124,16 @@
                        FontSize="14"
                        Foreground="#666666"
                        Margin="51 0 0 0"/>
+
+            <Button Content="Add Ship"
+                        Width="150"
+                        Style="{StaticResource DetailButton}"
+                        Command="{Binding OpenAddShipCommand}"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 0 15"/>
         </StackPanel>
+        
+        
 
         <!-- ====== DATA TABLE ====== -->
         <Border Grid.Row="1"
