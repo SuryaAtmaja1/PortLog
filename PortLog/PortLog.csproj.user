@@ -26,6 +26,9 @@
     <Compile Update="Views\DetailShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\FleetCaptainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\FleetView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

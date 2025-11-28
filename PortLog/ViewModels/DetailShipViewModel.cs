@@ -61,20 +61,41 @@ namespace PortLog.ViewModels
         private Ship _ship;
         public Guid CaptainId => _ship?.CaptainId ?? Guid.Empty;
 
+        // NEW: expose whether current user can edit (manager)
+        public bool CanEdit { get; }
+
         public DetailShipViewModel(SupabaseService supabase, long shipId, AccountService accountService)
         {
             _supabase = supabase;
             _accountService = accountService;
             ShipId = shipId;
 
-            EditCommand = new RelayCommand(_ => EnterEditMode());
-            SaveCommand = new RelayCommand(async _ => await Save());
-            CancelCommand = new RelayCommand(_ => Cancel());
-                
+            // determine permission: manager can edit, captain cannot
+            var role = _accountService.LoggedInAccount?.Role?.ToLowerInvariant() ?? string.Empty;
+            CanEdit = role == "manager" || role == "admin"; // tambahkan "admin" jika ada role lain yang boleh edit
+
+            // Commands: if RelayCommand supports canExecute predicate, we pass it.
+            // If not, internal checks in methods will still prevent edit when CanEdit == false.
+            try
+            {
+                EditCommand = new RelayCommand(_ => EnterEditMode(), _ => CanEdit);
+                SaveCommand = new RelayCommand(async _ => await Save(), _ => CanEdit);
+                CancelCommand = new RelayCommand(_ => Cancel(), _ => CanEdit);
+            }
+            catch
+            {
+                // Fallback: RelayCommand mungkin tidak mendukung predicate
+                EditCommand = new RelayCommand(_ => EnterEditMode());
+                SaveCommand = new RelayCommand(async _ => await Save());
+                CancelCommand = new RelayCommand(_ => Cancel());
+            }
+
             IsEditing = false;
 
             _ = LoadData();
-            _ = LoadCaptains();
+            // only load captains if user can edit (manager)
+            if (CanEdit)
+                _ = LoadCaptains();
         }
 
         private async Task LoadData()
@@ -130,11 +151,15 @@ namespace PortLog.ViewModels
 
         private void EnterEditMode()
         {
+            // Safety: guard, jika tidak punya hak edit jangan masuk mode edit
+            if (!CanEdit) return;
+
             IsEditing = true;
         }
 
         private void Cancel()
         {
+            // Only cancel if editing
             IsEditing = false;
 
             EditName = Name;
@@ -144,6 +169,9 @@ namespace PortLog.ViewModels
 
         private async Task Save()
         {
+            // guard: only managers can save
+            if (!CanEdit) return;
+
             if (EditCaptain == null)
                 return;
 
@@ -174,6 +202,9 @@ namespace PortLog.ViewModels
 
         private async Task LoadCaptains()
         {
+            // Only load captains list if can edit (manager)
+            if (!CanEdit) return;
+
             Captains.Clear();
 
             var res = await _supabase.Table<Account>()
@@ -187,5 +218,4 @@ namespace PortLog.ViewModels
             EditCaptain = Captains.FirstOrDefault(c => c.Id == CaptainId);
         }
     }
-
 }

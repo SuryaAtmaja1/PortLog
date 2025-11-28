@@ -15,6 +15,8 @@ namespace PortLog.ViewModels
         // Only Overview page for now
         public DashboardCaptainViewModel OverviewVM { get; }
 
+        public FleetCaptainViewModel FleetCaptainVM { get; }
+
         public ICommand NavigateCommand { get; }
         public ICommand LogoutCommand { get; }
 
@@ -43,6 +45,7 @@ namespace PortLog.ViewModels
             var accountSvc = mainVm?.AccountService;
 
             OverviewVM = new DashboardCaptainViewModel(navigationService, accountService);
+            FleetCaptainVM = new FleetCaptainViewModel(supabase, accountService);
 
             NavigateCommand = new RelayCommand(OnNavigate);
             LogoutCommand = new RelayCommand(OnLogout);
@@ -61,6 +64,10 @@ namespace PortLog.ViewModels
             {
                 CurrentPage = OverviewVM;
                 OverviewVM.OnNavigatedTo();
+            } else if (SelectedMenu == "Fleet")
+            {
+                CurrentPage = FleetCaptainVM;
+                FleetCaptainVM.OnNavigatedTo();
             }
         }
 

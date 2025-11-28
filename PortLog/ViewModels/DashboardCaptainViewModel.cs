@@ -49,7 +49,7 @@ namespace PortLog.ViewModels
             DetailCommand = new RelayCommand(OpenDetail);
 
             // start loading
-            _ = LoadAllAsync();
+            //_ = LoadAllAsync();
         }
 
         // --------- Bindable props ----------
@@ -181,7 +181,7 @@ namespace PortLog.ViewModels
         {
             if (parameter is long shipId)
             {
-                var detailVm = new DetailShipViewModel(_supabase, shipId);
+                var detailVm = new DetailShipViewModel(_supabase, shipId, _accountService);
                 detailVm.DataChanged += async () => await LoadCaptainShipsAsync();
 
                 var window = new DetailShipView

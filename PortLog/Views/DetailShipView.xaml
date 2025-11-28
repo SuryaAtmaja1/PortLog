@@ -1,6 +1,7 @@
 ﻿<Window x:Class="PortLog.Views.DetailShipView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:PortLog.Converters"
         Title="Ship Detail"
         Height="650" Width="560"
         WindowStartupLocation="CenterOwner"
@@ -8,6 +9,10 @@
         Background="#F8F9FA"
         SizeToContent="Height">
     <Window.Resources>
+        <!-- Converters -->
+        <conv:BoolToVisibilityConverter x:Key="BoolToVis" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisInvert"/>
+
         <!-- Shadow Effect -->
         <DropShadowEffect x:Key="CardShadow" 
                           BlurRadius="20" 
@@ -100,7 +105,7 @@
             </Style.Triggers>
         </Style>
 
-        <!-- TextBox Style -->
+        <!-- Modern TextBox / ComboBox -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="12 10"/>
@@ -122,7 +127,6 @@
             </Setter>
         </Style>
 
-        <!-- ComboBox Style -->
         <Style x:Key="ModernComboBox" TargetType="ComboBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="12 10"/>
@@ -130,6 +134,47 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
+
+        <!-- Button styles that keep visual style but control visibility via MultiDataTrigger -->
+        <Style x:Key="EditButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding CanEdit}" Value="True"/>
+                        <Condition Binding="{Binding IsEditing}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SaveButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding CanEdit}" Value="True"/>
+                        <Condition Binding="{Binding IsEditing}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource DangerButton}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding CanEdit}" Value="True"/>
+                        <Condition Binding="{Binding IsEditing}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
 
     <Border Background="White" 
@@ -170,13 +215,16 @@
                                FontSize="11"
                                Foreground="#666666"
                                Margin="0 0 0 8"/>
+                    <!-- Read-only display -->
                     <TextBlock Text="{Binding Name}" 
                                FontSize="16"
                                Foreground="#1A1A1A"
                                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"/>
-                    <TextBox Text="{Binding EditName}" 
+                    <!-- Edit field -->
+                    <TextBox Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" 
                              Style="{StaticResource ModernTextBox}"
                              Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <!-- Note: the above line references a helper - see alternate approach below if you don't want window-level helper -->
                 </StackPanel>
 
                 <!-- TYPE -->
@@ -213,7 +261,7 @@
                                    Foreground="#0081A7"
                                    VerticalAlignment="Center"/>
                     </StackPanel>
-                    <TextBox Text="{Binding EditCapacity}" 
+                    <TextBox Text="{Binding EditCapacity, UpdateSourceTrigger=PropertyChanged}" 
                              Style="{StaticResource ModernTextBox}"
                              Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </StackPanel>
@@ -228,7 +276,7 @@
 
                     <!-- READ MODE -->
                     <StackPanel Orientation="Horizontal"
-                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
+                                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
                         <TextBlock Text="👤" FontSize="16" Margin="0 0 8 0" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding CaptainName}"
                    FontSize="16"
@@ -238,10 +286,10 @@
 
                     <!-- EDIT MODE -->
                     <ComboBox ItemsSource="{Binding Captains}"
-              SelectedItem="{Binding EditCaptain}"
-              Style="{StaticResource ModernComboBox}"
-              Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
-              Margin="0 0 0 0">
+                              SelectedItem="{Binding EditCaptain}"
+                              Style="{StaticResource ModernComboBox}"
+                              Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                              Margin="0 0 0 0">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -256,7 +304,6 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-
 
                 <!-- LAST VOYAGE -->
                 <StackPanel Grid.Row="4" Margin="0 0 0 20">
@@ -285,27 +332,24 @@
                         HorizontalAlignment="Right">
                 <!-- Edit Button -->
                 <Button Content="Edit"
-                        Style="{StaticResource PrimaryButton}"
-                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"
                         Width="90"
                         Margin="0 0 10 0"
-                        Command="{Binding EditCommand}"/>
+                        Command="{Binding EditCommand}"
+                        Style="{StaticResource EditButtonStyle}"/>
 
                 <!-- Save Button -->
                 <Button Content="Save"
-                        Style="{StaticResource PrimaryButton}"
-                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
                         Width="90"
                         Margin="0 0 10 0"
-                        Command="{Binding SaveCommand}"/>
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource SaveButtonStyle}"/>
 
                 <!-- Cancel Button -->
                 <Button Content="Cancel"
-                        Style="{StaticResource DangerButton}"
-                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
                         Width="90"
                         Margin="0 0 10 0"
-                        Command="{Binding CancelCommand}"/>
+                        Command="{Binding CancelCommand}"
+                        Style="{StaticResource CancelButtonStyle}"/>
 
                 <!-- Close Button -->
                 <Button Content="Close"

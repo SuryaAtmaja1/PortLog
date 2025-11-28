@@ -30,6 +30,12 @@
                         Tag="Overview"
                         Style="{StaticResource NavButtonStyle}"
                         help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=Overview, Converter={StaticResource ActiveMenuConverter}}"/>
+                <Button Content="Fleet"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Fleet"
+                        Tag="Fleet"
+                        Style="{StaticResource NavButtonStyle}"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=Fleet, Converter={StaticResource ActiveMenuConverter}}"/>
 
                 <Separator Margin="0,12"/>
 
