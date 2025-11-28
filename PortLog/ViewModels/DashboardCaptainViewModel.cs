@@ -19,8 +19,8 @@ namespace PortLog.ViewModels
             if (_accountService.LoggedInAccount?.CompanyId != null)
             {
                 Company? company = await _companyService.GetCompanyByIdAsync(
-                    _accountService.LoggedInAccount.CompanyId
-                );
+                    _accountService.LoggedInAccount.CompanyId.Value
+                ); 
 
                 _companyInfo = company != null
                     ? $"Company: {company.Name}"

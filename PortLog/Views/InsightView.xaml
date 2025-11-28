@@ -1,7 +1,229 @@
 ﻿<UserControl x:Class="PortLog.Views.InsightView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <TextBlock Text="Insight View"
-               FontSize="32"
-               Margin="20"/>
+    <UserControl.Resources>
+        <!-- Shadow Effect -->
+        <DropShadowEffect x:Key="CardShadow" 
+                          BlurRadius="20" 
+                          ShadowDepth="3" 
+                          Opacity="0.15" 
+                          Color="#000000"/>
+
+        <!-- Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#0081A7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#006d8f"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- DatePicker Style -->
+        <Style x:Key="ModernDatePicker" TargetType="DatePicker">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10 8"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="40" Background="#F8F9FA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ====== HEADER ====== -->
+        <TextBlock Text="Trip Insights" 
+                   FontSize="32" 
+                   FontWeight="Bold" 
+                   Foreground="#1A1A1A"
+                   Margin="0 0 0 30"/>
+
+        <!-- ====== FILTER BAR ====== -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="12" 
+                Padding="25"
+                Effect="{StaticResource CardShadow}"
+                Margin="0 0 0 30">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0 0 25 0">
+                    <TextBlock Text="START DATE" 
+                               FontWeight="SemiBold" 
+                               FontSize="11"
+                               Foreground="#666666"
+                               Margin="0 0 0 8"/>
+                    <DatePicker SelectedDate="{Binding StartDate}" 
+                                Width="160"
+                                Style="{StaticResource ModernDatePicker}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 25 0">
+                    <TextBlock Text="END DATE" 
+                               FontWeight="SemiBold" 
+                               FontSize="11"
+                               Foreground="#666666"
+                               Margin="0 0 0 8"/>
+                    <DatePicker SelectedDate="{Binding EndDate}" 
+                                Width="160"
+                                Style="{StaticResource ModernDatePicker}"/>
+                </StackPanel>
+
+                <Button Content="Search"
+                        Command="{Binding SearchCommand}"
+                        Style="{StaticResource ModernButton}"
+                        Width="120"
+                        VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ====== INSIGHT CARDS ====== -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Total Trips Card -->
+            <Border Background="White"
+                    CornerRadius="16"
+                    Padding="30"
+                    Margin="0 0 15 15"
+                    Effect="{StaticResource CardShadow}">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="#0081A7"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 4"/>
+                    </Style>
+                </Border.Style>
+                <StackPanel>
+                    <TextBlock Text="🚢" FontSize="36" Margin="0 0 0 10"/>
+                    <TextBlock Text="Total Trips" 
+                               FontSize="16" 
+                               FontWeight="SemiBold"
+                               Foreground="#666666"
+                               Margin="0 0 0 8"/>
+                    <TextBlock Text="{Binding CurrentInsight.TotalTrips}" 
+                               FontSize="48" 
+                               FontWeight="Bold"
+                               Foreground="#0081A7"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Hours Card -->
+            <Border Background="White"
+                    CornerRadius="16"
+                    Padding="30"
+                    Grid.Column="1"
+                    Margin="15 0 0 15"
+                    Effect="{StaticResource CardShadow}">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="#FDB833"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 4"/>
+                    </Style>
+                </Border.Style>
+                <StackPanel>
+                    <TextBlock Text="⏱️" FontSize="36" Margin="0 0 0 10"/>
+                    <TextBlock Text="Total Hours" 
+                               FontSize="16" 
+                               FontWeight="SemiBold"
+                               Foreground="#666666"
+                               Margin="0 0 0 8"/>
+                    <TextBlock Text="{Binding CurrentInsight.TotalHours}" 
+                               FontSize="48" 
+                               FontWeight="Bold"
+                               Foreground="#FDB833"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Statistics Card -->
+            <Border Background="White"
+                    CornerRadius="16"
+                    Padding="30"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0 15 0 0"
+                    Effect="{StaticResource CardShadow}">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="#00B894"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 4"/>
+                    </Style>
+                </Border.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Distance -->
+                    <StackPanel Margin="0 0 20 0">
+                        <TextBlock Text="📏" FontSize="32" Margin="0 0 0 10"/>
+                        <TextBlock Text="DISTANCE TRAVELED" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="11"
+                                   Foreground="#666666"
+                                   Margin="0 0 0 8"/>
+                        <TextBlock Text="{Binding CurrentInsight.TotalDistance}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#1A1A1A"/>
+                    </StackPanel>
+
+                    <!-- Speed -->
+                    <StackPanel Grid.Column="1" Margin="20 0">
+                        <TextBlock Text="⚡" FontSize="32" Margin="0 0 0 10"/>
+                        <TextBlock Text="AVERAGE SPEED" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="11"
+                                   Foreground="#666666"
+                                   Margin="0 0 0 8"/>
+                        <TextBlock Text="{Binding CurrentInsight.AverageSpeed}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#1A1A1A"/>
+                    </StackPanel>
+
+                    <!-- Fuel -->
+                    <StackPanel Grid.Column="2" Margin="20 0 0 0">
+                        <TextBlock Text="⛽" FontSize="32" Margin="0 0 0 10"/>
+                        <TextBlock Text="FUEL CONSUMPTION" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="11"
+                                   Foreground="#666666"
+                                   Margin="0 0 0 8"/>
+                        <TextBlock Text="{Binding CurrentInsight.AverageFuelConsumption}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#1A1A1A"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

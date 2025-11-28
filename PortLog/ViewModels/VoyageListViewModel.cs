@@ -54,6 +54,8 @@ namespace PortLog.ViewModels
             SearchCommand = new RelayCommand(async _ => await LoadVoyages());
         }
 
+        public void OnNavigatedTo() => _ = LoadVoyages();
+
         private async Task LoadVoyages()
         {
             Voyages.Clear();

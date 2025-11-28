@@ -1,7 +1,7 @@
 using PortLog.Enumerations;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace PortLog.Models
 {
@@ -25,7 +25,7 @@ namespace PortLog.Models
         public string Role { get; set; }
 
         [Column("company_id")]
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }

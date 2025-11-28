@@ -1,13 +1,26 @@
+using PortLog.Enumerations;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
+using Newtonsoft.Json;
+
 namespace PortLog.Models
 {
+    [Table("insights")]
     public class Insight
     {
+        [Column("start_date")]
         public DateTime StartDate { get; private set; }
+        [Column("end_date")]
         public DateTime EndDate { get; private set; }
+        [Column("total_trips")]
         public int TotalTrips { get; private set; }
+        [Column("total_hours")]
         public TimeSpan TotalHours { get; private set; }
+        [Column("total_distance")]
         public float TotalDistance { get; private set; }
+        [Column("average_speed")]
         public float AverageSpeed { get; private set; }
+        [Column("average_fuel_consumption")]
         public float AverageFuelConsumption { get; private set; }
 
         /// <summary>

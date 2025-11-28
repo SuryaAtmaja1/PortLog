@@ -15,7 +15,8 @@ namespace PortLog.ViewModels
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
 
-        // TOP CARDS
+        // ==================== TOP CARDS ====================
+
         public int CurrentSailingShips
         {
             get => _currentSailingShips;
@@ -37,9 +38,21 @@ namespace PortLog.ViewModels
         }
         private int _weeklyVoyages;
 
-        // LISTS
+        // ==================== LISTS ====================
+
         public ObservableCollection<DashboardFleetItem> FleetPreview { get; } = new();
         public ObservableCollection<DashboardVoyageItem> LatestVoyages { get; } = new();
+
+        // ==================== SUMMARY INSIGHT ====================
+
+        public Insight SummaryInsight
+        {
+            get => _summaryInsight;
+            set => SetProperty(ref _summaryInsight, value);
+        }
+        private Insight _summaryInsight;
+
+        // ==================== INIT ====================
 
         public DashboardHomeViewModel(SupabaseService supabase, AccountService accountService)
         {
@@ -52,31 +65,34 @@ namespace PortLog.ViewModels
         public void OnNavigatedTo() => _ = LoadDashboard();
 
 
+
+        // ==========================================================
+        // MAIN DASHBOARD LOADER
+        // ==========================================================
+
         private async Task LoadDashboard()
         {
             try
             {
                 var companyId = _accountService.LoggedInAccount.CompanyId.ToString();
 
-                // ====================================================
-                // 1. AMBIL SEMUA SHIP MILIK COMPANY
-                // ====================================================
+                // ===================== GET SHIPS =====================
                 var shipsRes = await _supabase
                     .Table<Ship>()
                     .Filter("company_id", Operator.Equals, companyId)
                     .Get();
 
                 var ships = shipsRes.Models;
-                var shipIds = ships.Select(s => s.Id).ToList();
 
-                // ====================================================
-                // 2. CURRENT SAILING SHIPS
-                // ====================================================
+                var shipIds = ships.Select(s => (object)s.Id).ToArray();
+
+                // ===================== CARD 1: CURRENT SAILING =====================
+
                 CurrentSailingShips = ships.Count(s => s.Status == "SAILING");
 
-                // ====================================================
-                // 3. FLEET PREVIEW (5 terbaru)
-                // ====================================================
+
+                // ===================== FLEET PREVIEW: 5 TERBARU =====================
+
                 FleetPreview.Clear();
 
                 var fiveShips = ships
@@ -86,7 +102,6 @@ namespace PortLog.ViewModels
 
                 foreach (var ship in fiveShips)
                 {
-                    // last voyage per ship
                     var lastVoyage = await _supabase
                         .Table<VoyageLog>()
                         .Filter("ship_id", Operator.Equals, ship.Id.ToString())
@@ -107,20 +122,19 @@ namespace PortLog.ViewModels
                     });
                 }
 
-                // ====================================================
-                // 4. WEEKLY VOYAGE COUNT + REVENUE
-                // ====================================================
+
+                // ===================== WEEKLY VOYAGES & REVENUE =====================
+
                 WeeklyVoyages = 0;
                 WeeklyRevenueDisplay = "Rp 0";
 
                 if (shipIds.Any())
                 {
-                    string shipFilter = "(" + string.Join(",", shipIds) + ")";
                     DateTime sevenDaysAgo = DateTime.UtcNow.AddDays(-7);
 
                     var weeklyVoyagesRes = await _supabase
                         .Table<VoyageLog>()
-                        .Filter("ship_id", Operator.In, shipIds.Cast<object>().ToArray())
+                        .Filter("ship_id", Operator.In, shipIds)
                         .Filter("arrival_time", Operator.GreaterThanOrEqual, sevenDaysAgo.ToString("o"))
                         .Order("arrival_time", Ordering.Descending)
                         .Get();
@@ -133,18 +147,16 @@ namespace PortLog.ViewModels
                     WeeklyRevenueDisplay = $"Rp {revenue:N0}";
                 }
 
-                // ====================================================
-                // 5. LATEST COMPLETED VOYAGES (5 terakhir)
-                // ====================================================
+
+                // ===================== LATEST COMPLETED VOYAGES =====================
+
                 LatestVoyages.Clear();
 
                 if (shipIds.Any())
                 {
-                    string shipFilter = "(" + string.Join(",", shipIds) + ")";
-
                     var latestRes = await _supabase
                         .Table<VoyageLog>()
-                        .Filter("ship_id", Operator.In, shipIds.Cast<object>().ToArray())
+                        .Filter("ship_id", Operator.In, shipIds)
                         .Order("arrival_time", Ordering.Descending)
                         .Limit(5)
                         .Get();
@@ -159,6 +171,50 @@ namespace PortLog.ViewModels
                         });
                     }
                 }
+
+
+                // ===================== SUMMARY INSIGHT: LAST 7 DAYS =====================
+
+                if (!shipIds.Any())
+                {
+                    SummaryInsight = new Insight(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow, 0, TimeSpan.Zero, 0, 0, 0);
+                    return;
+                }
+
+                var start = DateTime.UtcNow.AddDays(-7);
+                var end = DateTime.UtcNow;
+
+                var insightRes = await _supabase
+                    .Table<VoyageLog>()
+                    .Filter("ship_id", Operator.In, shipIds)
+                    .Filter("departure_time", Operator.GreaterThanOrEqual, start.ToString("o"))
+                    .Filter("arrival_time", Operator.LessThanOrEqual, end.ToString("o"))
+                    .Get();
+
+                var voyages = insightRes.Models;
+
+                if (!voyages.Any())
+                {
+                    SummaryInsight = new Insight(start, end, 0, TimeSpan.Zero, 0, 0, 0);
+                }
+                else
+                {
+                    int totalTrips = voyages.Count;
+
+                    var totalHours = TimeSpan.FromHours(
+                        voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).TotalHours)
+                    );
+
+                    float totalDistance = (float)voyages.Sum(v => v.TotalDistanceTraveled);
+
+                    float avgSpeed = totalHours.TotalHours > 0
+                        ? totalDistance / (float)totalHours.TotalHours
+                        : 0;
+
+                    float avgFuel = (float)voyages.Average(v => v.AverageFuelConsumption);
+
+                    SummaryInsight = new Insight(start, end, totalTrips, totalHours, totalDistance, avgSpeed, avgFuel);
+                }
             }
             catch (Exception ex)
             {
@@ -171,7 +227,9 @@ namespace PortLog.ViewModels
         }
     }
 
-    // ================= MODELS ==================
+
+
+    // =============== MODELS ===============
 
     public class DashboardFleetItem
     {

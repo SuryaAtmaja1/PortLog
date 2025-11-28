@@ -1,7 +1,7 @@
 using PortLog.Enumerations;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace PortLog.Models
 {

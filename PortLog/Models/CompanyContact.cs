@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace PortLog.Models
 {
+    [Table("company_contacts")]
     public class CompanyContact: BaseModel
     {
         [PrimaryKey("id")]

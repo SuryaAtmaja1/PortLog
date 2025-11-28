@@ -20,6 +20,11 @@ namespace PortLog.ViewModels
 
             NavigateCommand = new RelayCommand(OnNavigate);
 
+            CompanyVM = new CompanyManagementViewModel(
+                navigationService.MainViewModel.SupabaseService,
+                navigationService.MainViewModel.AccountService
+            );
+
             HomeVM = new DashboardHomeViewModel(
                 navigationService.MainViewModel.SupabaseService,
                 navigationService.MainViewModel.AccountService
@@ -31,6 +36,11 @@ namespace PortLog.ViewModels
             );
 
             VoyageVM = new VoyageListViewModel(
+                navigationService.MainViewModel.SupabaseService,
+                navigationService.MainViewModel.AccountService
+            );
+
+            InsightVM = new InsightViewModel(
                 navigationService.MainViewModel.SupabaseService,
                 navigationService.MainViewModel.AccountService
             );
@@ -53,11 +63,11 @@ namespace PortLog.ViewModels
 
         // ViewModel Halaman
         public DashboardHomeViewModel HomeVM { get; }
-        public CompanyManagementViewModel CompanyVM { get; } = new();
+        public CompanyManagementViewModel CompanyVM { get; }
         public FleetViewModel FleetVM { get; }
         public ShipViewModel ShipVM { get; } = new();
         public VoyageListViewModel VoyageVM { get; }
-        public InsightViewModel InsightVM { get; } = new();
+        public InsightViewModel InsightVM { get; }
 
         public ICommand LogoutCommand { get; }
 
@@ -80,7 +90,7 @@ namespace PortLog.ViewModels
                     break;
                 case "Company":
                     CurrentPage = CompanyVM;
-                    //CompanyVM.OnNavigatedTo();
+                    CompanyVM.OnNavigatedTo();
                     break;
                 case "Fleet":
                     CurrentPage = FleetVM;
@@ -88,11 +98,11 @@ namespace PortLog.ViewModels
                     break;
                 case "Voyage":
                     CurrentPage = VoyageVM;
-                    //VoyageVM.OnNavigatedTo();
+                    VoyageVM.OnNavigatedTo();
                     break;
                 case "Insight":
                     CurrentPage = InsightVM;
-                    //InsightVM.OnNavigatedTo();
+                    InsightVM.OnNavigatedTo();
                     break;
             }
         }
