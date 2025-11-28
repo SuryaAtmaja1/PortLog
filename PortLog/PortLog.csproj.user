@@ -41,6 +41,9 @@
     <Compile Update="Views\ManageCrewView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\CaptainDashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Register1View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
