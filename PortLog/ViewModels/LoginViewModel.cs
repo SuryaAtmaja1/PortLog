@@ -64,7 +64,7 @@ namespace PortLog.ViewModels
                 }
                 else
                 {
-                    _navigationService.NavigateTo(new DashboardCaptainViewModel(_navigationService, _accountService));
+                    _navigationService.NavigateTo(new CaptainDashboardViewModel(_navigationService, _accountService));
                 }
             }
             else

@@ -1,5 +1,6 @@
 ﻿using PortLog.Models;
 using PortLog.Supabase;
+using Supabase.Postgrest;
 
 namespace PortLog.Services
 {
@@ -37,23 +38,34 @@ namespace PortLog.Services
             }
         }
 
-        public async Task<Company?> GetCompanyByIdAsync(
-            Guid id)
+        public async Task<Company?> GetCompanyByIdAsync(Guid id)
         {
             try
             {
+
                 var response = await _supabase
                     .Table<Company>()
-                    .Where(c => c.Id == id)
-                    .Single();
+                    .Filter("id", Constants.Operator.Equals, id.ToString())
+                    .Get();
 
-                return response;
+                if (response == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("GetCompanyByIdAsync: response is null");
+                    return null;
+                }
+
+                var company = response.Models?.FirstOrDefault();
+
+                return company;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"GetCompanyByIdAsync: exception: {ex.GetType().Name}: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 return null;
             }
         }
+
 
         public async Task<(Company? company, string error)> CreateCompanyAsync(
             string name,
