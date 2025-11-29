@@ -14,5 +14,10 @@ namespace PortLog.Views
             vm.RequestClose += (s, e) => { this.DialogResult = e; this.Close(); };
             this.DataContext = vm;
         }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }

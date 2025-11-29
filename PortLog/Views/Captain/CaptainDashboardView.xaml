@@ -42,6 +42,12 @@
                         Tag="VoyageState"
                         Style="{StaticResource NavButtonStyle}"
                         help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=VoyageState, Converter={StaticResource ActiveMenuConverter}}"/>
+                <Button Content="Profile"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Profile"
+                        Tag="Profile"
+                        Style="{StaticResource NavButtonStyle}"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=Profile, Converter={StaticResource ActiveMenuConverter}}"/>
 
                 <Separator Margin="0,12"/>
 

@@ -5,6 +5,9 @@
     <Compile Update="Components\ConfirmDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Captain\ProfileCaptainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Manager\AddShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

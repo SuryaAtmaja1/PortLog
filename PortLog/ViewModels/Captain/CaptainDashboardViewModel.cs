@@ -1,6 +1,7 @@
 ﻿using PortLog.Commands;
 using PortLog.Services;
 using PortLog.Supabase;
+using PortLog.ViewModels;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -19,6 +20,7 @@ namespace PortLog.ViewModels
 
         public VoyageChangeStateViewModel VoyageStateVM {  get; }
 
+        public ProfileCaptainViewModel ProfileCaptainVM { get; }
         public ICommand NavigateCommand { get; }
         public ICommand LogoutCommand { get; }
 
@@ -49,9 +51,12 @@ namespace PortLog.ViewModels
             OverviewVM = new DashboardCaptainViewModel(navigationService, accountService);
             FleetCaptainVM = new FleetCaptainViewModel(supabase, accountService);
             VoyageStateVM = new VoyageChangeStateViewModel(supabase, accountService);
+            ProfileCaptainVM = new ProfileCaptainViewModel(supabase, accountService);
 
             NavigateCommand = new RelayCommand(OnNavigate);
             LogoutCommand = new RelayCommand(OnLogout);
+
+            OverviewVM.ParentVM = this;
 
             // default page
             SelectedMenu = "Overview";
@@ -63,18 +68,24 @@ namespace PortLog.ViewModels
         {
             SelectedMenu = parameter?.ToString();
 
-            if (SelectedMenu == "Overview")
+            switch (SelectedMenu)
             {
-                CurrentPage = OverviewVM;
-                OverviewVM.OnNavigatedTo();
-            } else if (SelectedMenu == "Fleet")
-            {
-                CurrentPage = FleetCaptainVM;
-                FleetCaptainVM.OnNavigatedTo();
-            } else if (SelectedMenu == "VoyageState")
-            {
-                CurrentPage = VoyageStateVM;
-                VoyageStateVM.OnNavigatedTo();
+                case "Overview":
+                    CurrentPage = OverviewVM;
+                    OverviewVM.OnNavigatedTo();
+                    break;
+                case "Fleet":
+                    CurrentPage = FleetCaptainVM;
+                    FleetCaptainVM.OnNavigatedTo();
+                    break;
+                case "VoyageState":
+                    CurrentPage = VoyageStateVM;
+                    VoyageStateVM.OnNavigatedTo();
+                    break;
+                case "Profile":
+                    CurrentPage = ProfileCaptainVM;
+                    ProfileCaptainVM.OnNavigatedTo();
+                    break;
             }
         }
 

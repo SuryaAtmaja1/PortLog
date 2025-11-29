@@ -1,135 +1,332 @@
 ﻿<UserControl x:Class="PortLog.Views.DashboardCaptainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+
+        <!-- Card Button -->
+        <!-- Hover Animation for Card Buttons -->
+        <Style x:Key="CardButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- HOVER EFFECT -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Zoom In -->
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                         To="1.03" Duration="0:0:0.15"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                         To="1.03" Duration="0:0:0.15"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Zoom Out -->
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                         To="1" Duration="0:0:0.15"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                         To="1" Duration="0:0:0.15"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SmallBadgeButtonBase" TargetType="Button">
+            <Setter Property="Background" Value="#E3F2FD"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        CornerRadius="10"
+                        Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SmallBadgeButton"
+       TargetType="Button"
+       BasedOn="{StaticResource SmallBadgeButtonBase}">
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                         To="1.05" Duration="0:0:0.12"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                         To="1.05" Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                         To="1" Duration="0:0:0.12"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                         To="1" Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+
+    </UserControl.Resources>
+
+
+
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
+        <!-- HEADER -->
         <Border Background="#1565C0" Padding="30" Grid.Row="0">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" ShadowDepth="3" Opacity="0.3"/>
             </Border.Effect>
+
             <StackPanel>
                 <TextBlock Text="⚓ PortLog" 
-                          FontSize="28" FontWeight="Bold" 
-                          Foreground="White" Margin="0,0,0,5"/>
-                <TextBlock Text="Captain Dashboard" 
-                          FontSize="20" 
-                          Foreground="#E3F2FD" Opacity="0.9"/>
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,5"/>
+
+                <TextBlock Text="Captain Dashboard"
+                           FontSize="20"
+                           Foreground="#E3F2FD"
+                           Opacity="0.9"/>
             </StackPanel>
         </Border>
 
-        <!-- Content -->
+
+
+        <!-- CONTENT -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="50,40">
-                <!-- Welcome Card -->
+
+
+                <!-- WELCOME CARD -->
                 <Border Background="White" CornerRadius="15" Padding="35" Margin="0,0,0,30">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.15"/>
                     </Border.Effect>
                     <StackPanel>
-                        <TextBlock Text="{Binding WelcomeMessage}" 
-                                  FontSize="26" FontWeight="Bold" 
-                                  Foreground="#1565C0" Margin="0,0,0,15"/>
-                        <TextBlock Text="{Binding CompanyInfo}" 
-                                  FontSize="18" Foreground="#666666" Margin="0,0,0,12"/>
-                        <Border Background="#E3F2FD" CornerRadius="8" Padding="15,12" 
-                               HorizontalAlignment="Left" Margin="0,8,0,0">
+
+                        <TextBlock Text="{Binding WelcomeMessage}"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Foreground="#1565C0"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding CompanyInfo}"
+                                   FontSize="18"
+                                   Foreground="#666666"
+                                   Margin="0,0,0,12"/>
+
+
+                        <!-- YOU MANAGE X SHIPS (BUTTON) -->
+                        <Button Style="{StaticResource SmallBadgeButton}"
+                                Command="{Binding ParentVM.NavigateCommand}"
+                                CommandParameter="Fleet">
+
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="🚢" FontSize="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="🚢"
+                                           FontSize="20"
+                                           Margin="0,0,10,0"/>
                                 <TextBlock Text="{Binding CaptainShipCount, StringFormat='You manage {0} ship(s)'}"
-                                          FontSize="16" FontWeight="SemiBold" 
-                                          Foreground="#1565C0" VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center"/>
                             </StackPanel>
-                        </Border>
+
+                        </Button>
+
                     </StackPanel>
                 </Border>
 
-                <!-- Info Cards -->
+
+
+
+                <!-- 2 MAIN CARDS -->
                 <Grid Margin="0,0,0,30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Vessel Information Card -->
-                    <Border Background="White" CornerRadius="15" Padding="30" 
-                           Margin="0,0,15,0" Grid.Column="0">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.15"/>
-                        </Border.Effect>
-                        <StackPanel>
-                            <Border Background="#E3F2FD" CornerRadius="50" 
-                                   Width="60" Height="60" Margin="0,0,0,20">
-                                <TextBlock Text="📋" FontSize="30" 
-                                          HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Vessel Information" 
-                                      FontSize="20" FontWeight="Bold" 
-                                      Foreground="#1565C0" Margin="0,0,0,12"/>
-                            <TextBlock Text="View detailed information about your assigned vessels and their current status." 
-                                      TextWrapping="Wrap" FontSize="15" 
-                                      Foreground="#666666" LineHeight="22"/>
-                        </StackPanel>
-                    </Border>
 
-                    <!-- Port Logs Card -->
-                    <Border Background="White" CornerRadius="15" Padding="30" 
-                           Margin="15,0,0,0" Grid.Column="1">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.15"/>
-                        </Border.Effect>
-                        <StackPanel>
-                            <Border Background="#FFF3E0" CornerRadius="50" 
-                                   Width="60" Height="60" Margin="0,0,0,20">
-                                <TextBlock Text="📍" FontSize="30" 
-                                          HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Port Logs" 
-                                      FontSize="20" FontWeight="Bold" 
-                                      Foreground="#F57C00" Margin="0,0,0,12"/>
-                            <TextBlock Text="Access complete logs of port activities and voyage records for monitoring purposes." 
-                                      TextWrapping="Wrap" FontSize="15" 
-                                      Foreground="#666666" LineHeight="22"/>
-                        </StackPanel>
-                    </Border>
+                    <!-- VESSEL INFO CARD -->
+                    <Button Style="{StaticResource CardButton}"
+                            Command="{Binding ParentVM.NavigateCommand}"
+                            CommandParameter="Fleet"
+                            Grid.Column="0">
+
+                        <Border Background="White" CornerRadius="15"
+                                Padding="30" Margin="0,0,15,0">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.15"/>
+                            </Border.Effect>
+
+                            <StackPanel>
+                                <Border Background="#E3F2FD" CornerRadius="50"
+                                        Width="60" Height="60"
+                                        Margin="0,0,0,20">
+                                    <TextBlock Text="📋" FontSize="30"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                </Border>
+
+                                <TextBlock Text="Vessel Information"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#1565C0"
+                                           Margin="0,0,0,12"/>
+
+                                <TextBlock Text="View detailed information about your assigned vessels and their current status."
+                                           FontSize="15" Foreground="#666"
+                                           TextWrapping="Wrap" LineHeight="22"/>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+
+
+
+
+                    <!-- PORT LOGS CARD -->
+                    <Button Style="{StaticResource CardButton}"
+                            Command="{Binding ParentVM.NavigateCommand}"
+                            CommandParameter="VoyageState"
+                            Grid.Column="1">
+
+                        <Border Background="White" CornerRadius="15"
+                                Padding="30" Margin="15,0,0,0">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.15"/>
+                            </Border.Effect>
+
+                            <StackPanel>
+                                <Border Background="#FFF3E0" CornerRadius="50"
+                                        Width="60" Height="60"
+                                        Margin="0,0,0,20">
+                                    <TextBlock Text="📍" FontSize="30"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                </Border>
+
+                                <TextBlock Text="Port Logs"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#F57C00"
+                                           Margin="0,0,0,12"/>
+
+                                <TextBlock Text="Access complete logs of port activities and voyage records for monitoring purposes."
+                                           FontSize="15" Foreground="#666"
+                                           TextWrapping="Wrap" LineHeight="22"/>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
                 </Grid>
 
-                <!-- Access Notice -->
-                <Border Background="#E3F2FD" 
-                       CornerRadius="15" Padding="25">
+
+
+
+                <!-- ACCESS NOTICE (NOT A BUTTON) -->
+                <Border Background="#E3F2FD"
+                        CornerRadius="15"
+                        Padding="25">
                     <Border.Effect>
-                        <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.1"/>
+                        <DropShadowEffect BlurRadius="15"
+                                          ShadowDepth="2"
+                                          Opacity="0.1"/>
                     </Border.Effect>
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Background="#1565C0" CornerRadius="50" 
-                               Width="50" Height="50" Grid.Column="0" 
+
+                        <Border Background="#1565C0" CornerRadius="50"
+                               Width="50" Height="50"
                                Margin="0,0,20,0">
-                            <TextBlock Text="ℹ" FontSize="28" 
-                                      Foreground="White"
-                                      HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center"/>
+                            <TextBlock Text="ℹ"
+                                       FontSize="28"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
                         </Border>
+
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="Captain View Access" 
-                                      FontSize="18" FontWeight="Bold" 
-                                      Foreground="#1565C0" Margin="0,0,0,6"/>
-                            <TextBlock Text="You have read-only Company information and Ships. For updates or modifications, please contact your company manager." 
-                                      TextWrapping="Wrap" FontSize="15" 
-                                      Foreground="#0D47A1" LineHeight="20"/>
+                            <TextBlock Text="Captain View Access"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#1565C0"
+                                       Margin="0,0,0,6"/>
+
+                            <TextBlock Text="You have read-only Company information and Ships. For updates or modifications, please contact your company manager."
+                                       FontSize="15"
+                                       Foreground="#0D47A1"
+                                       TextWrapping="Wrap"
+                                       LineHeight="20"/>
                         </StackPanel>
+
                     </Grid>
                 </Border>
+
+
             </StackPanel>
         </ScrollViewer>
+
     </Grid>
+
 </UserControl>

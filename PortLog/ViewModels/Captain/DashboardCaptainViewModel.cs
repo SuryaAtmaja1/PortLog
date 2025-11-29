@@ -34,6 +34,8 @@ namespace PortLog.ViewModels
         private readonly CompanyService _companyService;
         private readonly SupabaseService _supabase;
 
+        public CaptainDashboardViewModel ParentVM { get; set; }
+
         public DashboardCaptainViewModel(PortLog.Services.NavigationService navigationService, AccountService accountService)
         {
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
