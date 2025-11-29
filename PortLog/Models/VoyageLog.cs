@@ -8,8 +8,8 @@ namespace PortLog.Models
     [Table("voyage_log")]
     public class VoyageLog : BaseModel
     {
-        [PrimaryKey("id")]
-        [Column("id")]
+        [PrimaryKey("id", shouldInsert: false)]
+        [Column("id", ignoreOnInsert: true)]
         public long Id { get; set; }
 
         [Column("ship_id")]
@@ -19,22 +19,22 @@ namespace PortLog.Models
         public DateTime DepartureTime { get; set; }
 
         [Column("arrival_time")]
-        public DateTime ArrivalTime { get; set; }
+        public DateTime? ArrivalTime { get; set; }
 
         [Column("departure_port")]
         public string DeparturePort { get; set; }
 
         [Column("arrival_port")]
-        public string ArrivalPort { get; set; }
+        public string? ArrivalPort { get; set; }
 
         [Column("notes")]
         public string Notes { get; set; }
 
         [Column("total_distance_traveled")]
-        public double TotalDistanceTraveled { get; set; }
+        public double? TotalDistanceTraveled { get; set; }
 
         [Column("average_fuel_consumption")]
-        public double AverageFuelConsumption { get; set; }
+        public double? AverageFuelConsumption { get; set; }
 
         [Column("revenue_idr_cents")]
         public long? Revenue { get; set; }

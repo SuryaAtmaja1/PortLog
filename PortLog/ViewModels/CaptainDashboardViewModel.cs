@@ -17,6 +17,8 @@ namespace PortLog.ViewModels
 
         public FleetCaptainViewModel FleetCaptainVM { get; }
 
+        public VoyageChangeStateViewModel VoyageStateVM {  get; }
+
         public ICommand NavigateCommand { get; }
         public ICommand LogoutCommand { get; }
 
@@ -46,6 +48,7 @@ namespace PortLog.ViewModels
 
             OverviewVM = new DashboardCaptainViewModel(navigationService, accountService);
             FleetCaptainVM = new FleetCaptainViewModel(supabase, accountService);
+            VoyageStateVM = new VoyageChangeStateViewModel(supabase, accountService);
 
             NavigateCommand = new RelayCommand(OnNavigate);
             LogoutCommand = new RelayCommand(OnLogout);
@@ -68,6 +71,10 @@ namespace PortLog.ViewModels
             {
                 CurrentPage = FleetCaptainVM;
                 FleetCaptainVM.OnNavigatedTo();
+            } else if (SelectedMenu == "VoyageState")
+            {
+                CurrentPage = VoyageStateVM;
+                VoyageStateVM.OnNavigatedTo();
             }
         }
 

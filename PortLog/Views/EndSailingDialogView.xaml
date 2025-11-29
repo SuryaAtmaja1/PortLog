@@ -1,0 +1,52 @@
+﻿<Window x:Class="PortLog.Views.EndSailingDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="End Sailing" Height="420" Width="560" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" Background="#FAFBFC">
+    <Grid Margin="18">
+        <Border Background="White" CornerRadius="10" Padding="18">
+            <StackPanel>
+                <TextBlock Text="End Sailing" FontSize="20" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,12"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="Ship:" Width="120" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ShipName}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="Arrival Port:" Width="120" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding ArrivalPort, UpdateSourceTrigger=PropertyChanged}" Width="360"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="Arrival Date:" Width="120" VerticalAlignment="Center"/>
+                    <DatePicker SelectedDate="{Binding ArrivalDate}" Width="180"/>
+                    <TextBox Text="{Binding ArrivalTimeText}" Width="120" Margin="8,0,0,0"
+                             ToolTip="HH:mm (24h)"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="Revenue (IDR):" Width="120" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding RevenueText}" Width="200" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="Distance (km):" Width="120" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding TotalDistanceText}" Width="120" />
+                    <TextBlock Text="Avg Fuel (L/100km):" Width="140" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    <TextBox Text="{Binding AvgFuelText}" Width="120" />
+                </StackPanel>
+
+                <TextBlock Text="Notes:" Margin="0,8,0,4"/>
+                <TextBox Text="{Binding Notes}" Height="80" AcceptsReturn="True" TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="0,6,0,0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+                    <Button Content="Cancel" Width="90" Margin="0,0,8,0" Command="{Binding CancelCommand}"/>
+                    <Button Content="End Sailing" Width="120" Command="{Binding SaveCommand}" Background="#2E7D32" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

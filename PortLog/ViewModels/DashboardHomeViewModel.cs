@@ -166,7 +166,7 @@ namespace PortLog.ViewModels
                         LatestVoyages.Add(new DashboardVoyageItem
                         {
                             Route = $"{v.DeparturePort} → {v.ArrivalPort}",
-                            Date = v.ArrivalTime.ToString("dd MMM yyyy"),
+                            Date = v.ArrivalTime.ToString(),
                             Revenue = v.RevenueIdr
                         });
                     }
@@ -202,7 +202,7 @@ namespace PortLog.ViewModels
                     int totalTrips = voyages.Count;
 
                     var totalHours = TimeSpan.FromHours(
-                        voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).TotalHours)
+                        voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).Value.Hours)
                     );
 
                     float totalDistance = (float)voyages.Sum(v => v.TotalDistanceTraveled);

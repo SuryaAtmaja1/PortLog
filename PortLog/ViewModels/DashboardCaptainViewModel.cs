@@ -91,7 +91,7 @@ namespace PortLog.ViewModels
                 {
                     var company = await _companyService.GetCompanyByIdAsync(_accountService.LoggedInAccount.CompanyId.Value);
                     CompanyInfo = company != null ? $"Company: {company.Name}" : "Tidak terafiliasi";
-                    Debug.WriteLine("memek:",company);
+                    
                 }
                 else
                 {

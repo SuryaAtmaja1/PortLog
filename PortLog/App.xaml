@@ -120,6 +120,9 @@
             <DataTemplate DataType="{x:Type vm:VoyageListViewModel}">
                 <views:VoyageListView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:VoyageChangeStateViewModel}">
+                <views:VoyageChangeStateView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:InsightViewModel}">
                 <views:InsightView/>
             </DataTemplate>

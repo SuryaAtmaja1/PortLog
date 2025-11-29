@@ -36,6 +36,12 @@
                         Tag="Fleet"
                         Style="{StaticResource NavButtonStyle}"
                         help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=Fleet, Converter={StaticResource ActiveMenuConverter}}"/>
+                <Button Content="Voyage Status"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="VoyageState"
+                        Tag="VoyageState"
+                        Style="{StaticResource NavButtonStyle}"
+                        help:NavigationHelper.IsActive="{Binding SelectedMenu, ConverterParameter=VoyageState, Converter={StaticResource ActiveMenuConverter}}"/>
 
                 <Separator Margin="0,12"/>
 

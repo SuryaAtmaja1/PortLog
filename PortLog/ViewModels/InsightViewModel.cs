@@ -75,7 +75,7 @@ namespace PortLog.ViewModels
                 int totalTrips = voyages.Count;
 
                 var totalHours = TimeSpan.FromHours(
-                    voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).TotalHours)
+                    voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).Value.TotalHours)
                 );
 
                 float totalDistance = (float)voyages.Sum(v => v.TotalDistanceTraveled);

@@ -26,6 +26,9 @@
     <Compile Update="Views\DetailShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\EndSailingDialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\FleetCaptainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,7 +59,13 @@
     <Compile Update="Views\Register3View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SailingDialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ShipView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VoyageChangeStateView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\VoyageListView.xaml.cs">
