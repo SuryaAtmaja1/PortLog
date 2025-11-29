@@ -26,6 +26,58 @@ namespace PortLog.Services
             return response.Models.FirstOrDefault();
         }
 
+        public async Task<List<VoyageLog>> GetVoyagesInLast7DaysAsync(object[] shipIds)
+        {
+            try
+            {
+                var sevenDaysAgo = DateTime.UtcNow.AddDays(-7);
+
+                var res = await _supabase
+                    .Table<VoyageLog>()
+                    .Filter("ship_id", Operator.In, shipIds)
+                    .Filter("arrival_time", Operator.GreaterThanOrEqual, sevenDaysAgo.ToString("o"))
+                    .Order("arrival_time", Ordering.Descending)
+                    .Get();
+
+                return res.Models ?? new List<VoyageLog>();
+            }
+            catch
+            {
+                return new List<VoyageLog>();
+            }
+        }
+
+        public async Task<VoyageLog?> GetLatestCompletedVoyage(object[] shipIds)
+        {
+            var res = await _supabase
+                .Table<VoyageLog>()
+                .Filter("ship_id", Operator.In, shipIds)
+                .Order("arrival_time", Ordering.Descending)
+                .Limit(1)
+                .Get();
+
+            return res.Models.FirstOrDefault();
+        }
+
+        public async Task<List<VoyageLog>> GetVoyagesInRangeAsync(object[] shipIds, DateTime start, DateTime end)
+        {
+            try
+            {
+                var res = await _supabase
+                    .Table<VoyageLog>()
+                    .Filter("ship_id", Operator.In, shipIds)
+                    .Filter("departure_time", Operator.GreaterThanOrEqual, start.ToString("o"))
+                    .Filter("arrival_time", Operator.LessThanOrEqual, end.ToString("o"))
+                    .Get();
+
+                return res.Models ?? new List<VoyageLog>();
+            }
+            catch
+            {
+                return new List<VoyageLog>();
+            }
+        }
+
         public async Task<List<VoyageLog>> GetVoyagesByShipAsync(
             long shipId,
             DateTime? startDate = null,

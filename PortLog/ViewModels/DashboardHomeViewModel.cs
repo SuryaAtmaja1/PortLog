@@ -16,6 +16,7 @@ namespace PortLog.ViewModels
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
         private readonly ShipService _shipService;
+        private readonly VoyageService _voyageService;
 
         // ==================== TOP CARDS ====================
 
@@ -61,6 +62,7 @@ namespace PortLog.ViewModels
             _supabase = supabase;
             _accountService = accountService;
             _shipService = new ShipService(supabase);
+            _voyageService = new VoyageService(supabase);
 
             _ = LoadDashboard();
         }
@@ -79,35 +81,20 @@ namespace PortLog.ViewModels
             {
                 var companyId = _accountService.LoggedInAccount.CompanyId.Value;
 
-                // ===================== GET SHIPS =====================
+                // GET SHIPS
                 var ships = await _shipService.GetShipsByCompanyIdAsync(companyId);
-
                 var shipIds = ships.Select(s => (object)s.Id).ToArray();
 
-                // ===================== CARD 1: CURRENT SAILING =====================
-
+                // CARD: CURRENT SAILING
                 CurrentSailingShips = ships.Count(s => s.Status == "SAILING");
 
-
-                // ===================== FLEET PREVIEW: 5 TERBARU =====================
-
+                // FLEET PREVIEW
                 FleetPreview.Clear();
-
-                var fiveShips = ships
-                    .OrderByDescending(s => s.Id)
-                    .Take(5)
-                    .ToList();
+                var fiveShips = ships.OrderByDescending(s => s.Id).Take(5);
 
                 foreach (var ship in fiveShips)
                 {
-                    var lastVoyage = await _supabase
-                        .Table<VoyageLog>()
-                        .Filter("ship_id", Operator.Equals, ship.Id.ToString())
-                        .Order("departure_time", Ordering.Descending)
-                        .Limit(1)
-                        .Get();
-
-                    var v = lastVoyage.Models.FirstOrDefault();
+                    var v = await _voyageService.GetLatestVoyageForShipAsync(ship.Id);
 
                     FleetPreview.Add(new DashboardFleetItem
                     {
@@ -120,114 +107,80 @@ namespace PortLog.ViewModels
                     });
                 }
 
-
-                // ===================== WEEKLY VOYAGES & REVENUE =====================
-
+                // WEEKLY VOYAGES & REVENUE
                 WeeklyVoyages = 0;
                 WeeklyRevenueDisplay = "Rp 0";
 
                 if (shipIds.Any())
                 {
-                    DateTime sevenDaysAgo = DateTime.UtcNow.AddDays(-7);
+                    var weeklyVoyages = await _voyageService.GetVoyagesInLast7DaysAsync(shipIds);
 
-                    var weeklyVoyagesRes = await _supabase
-                        .Table<VoyageLog>()
-                        .Filter("ship_id", Operator.In, shipIds)
-                        .Filter("arrival_time", Operator.GreaterThanOrEqual, sevenDaysAgo.ToString("o"))
-                        .Order("arrival_time", Ordering.Descending)
-                        .Get();
+                    WeeklyVoyages = weeklyVoyages.Count;
 
-                    var weeklyVoyagesList = weeklyVoyagesRes.Models;
-
-                    WeeklyVoyages = weeklyVoyagesList.Count;
-
-                    decimal revenue = weeklyVoyagesList.Sum(v => v.RevenueIdr);
+                    decimal revenue = weeklyVoyages.Sum(v => v.RevenueIdr);
                     WeeklyRevenueDisplay = $"Rp {revenue:N0}";
                 }
 
-
-                // ===================== LATEST COMPLETED VOYAGES =====================
-
+                // LATEST COMPLETED VOYAGE
                 LatestVoyages.Clear();
 
                 if (shipIds.Any())
                 {
-                    var latestRes = await _supabase
-                        .Table<VoyageLog>()
-                        .Filter("ship_id", Operator.In, shipIds)
-                        .Order("arrival_time", Ordering.Descending)
-                        .Limit(1)
-                        .Get();
+                    var last = await _voyageService.GetLatestCompletedVoyage(shipIds);
 
-                    foreach (var v in latestRes.Models)
+                    if (last != null)
                     {
-                        var ship = await _shipService.GetShipByIdAsync(v.ShipId);
+                        if (last.ArrivalPort == null)
+                            last.ArrivalPort = "TBA";
+                    
+                        var ship = await _shipService.GetShipByIdAsync(last.ShipId);
+
                         LatestVoyages.Add(new DashboardVoyageItem
                         {
-                            Route = $"{v.DeparturePort} → {v.ArrivalPort}",
-                            Date = v.ArrivalTime.ToString(),
-                            Revenue = v.RevenueIdr,
-                            Name = ship.Name,
+                            Route = $"{last.DeparturePort} → {last.ArrivalPort}",
+                            Date = last.ArrivalTime.ToString(),
+                            Revenue = last.RevenueIdr,
+                            Name = ship.Name
                         });
                     }
                 }
 
-
-                // ===================== SUMMARY INSIGHT: LAST 7 DAYS =====================
-
-                if (!shipIds.Any())
-                {
-                    SummaryInsight = new Insight(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow, 0, TimeSpan.Zero, 0, 0, 0);
-                    return;
-                }
-
+                // SUMMARY INSIGHT
                 var start = DateTime.UtcNow.AddDays(-7);
                 var end = DateTime.UtcNow;
 
-                var insightRes = await _supabase
-                    .Table<VoyageLog>()
-                    .Filter("ship_id", Operator.In, shipIds)
-                    .Filter("departure_time", Operator.GreaterThanOrEqual, start.ToString("o"))
-                    .Filter("arrival_time", Operator.LessThanOrEqual, end.ToString("o"))
-                    .Get();
+                if (!shipIds.Any())
+                {
+                    SummaryInsight = new Insight(start, end, 0, TimeSpan.Zero, 0, 0, 0);
+                    return;
+                }
 
-                var voyages = insightRes.Models;
+                var insightVoyages = await _voyageService.GetVoyagesInRangeAsync(shipIds, start, end);
 
-                if (!voyages.Any())
+                if (!insightVoyages.Any())
                 {
                     SummaryInsight = new Insight(start, end, 0, TimeSpan.Zero, 0, 0, 0);
                 }
                 else
                 {
-                    int totalTrips = voyages.Count;
-
-                    var totalHours = TimeSpan.FromHours(
-                        voyages.Sum(v => (v.ArrivalTime - v.DepartureTime).Value.Hours)
-                    );
-
-                    float totalDistance = (float)voyages.Sum(v => v.TotalDistanceTraveled);
-
-                    float avgSpeed = totalHours.TotalHours > 0
-                        ? totalDistance / (float)totalHours.TotalHours
-                        : 0;
-
-                    float avgFuel = (float)voyages.Average(v => v.AverageFuelConsumption);
+                    int totalTrips = insightVoyages.Count;
+                    var totalHours = TimeSpan.FromHours(insightVoyages.Sum(v => (v.ArrivalTime - v.DepartureTime).Value.Hours));
+                    float totalDistance = (float)insightVoyages.Sum(v => v.TotalDistanceTraveled);
+                    float avgSpeed = totalHours.TotalHours > 0 ? totalDistance / (float)totalHours.TotalHours : 0;
+                    float avgFuel = (float)insightVoyages.Average(v => v.AverageFuelConsumption);
 
                     SummaryInsight = new Insight(start, end, totalTrips, totalHours, totalDistance, avgSpeed, avgFuel);
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("🔥 DASHBOARD ERROR:");
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-
+                Debug.WriteLine("🔥 DASHBOARD ERROR:");
+                Debug.WriteLine(ex.Message);
                 if (ex.InnerException != null)
-                    System.Diagnostics.Debug.WriteLine("🔥 INNER: " + ex.InnerException.Message);
+                    Debug.WriteLine("🔥 INNER: " + ex.InnerException.Message);
             }
         }
     }
-
-
 
     // =============== MODELS ===============
 
