@@ -1,7 +1,0 @@
-﻿<UserControl x:Class="PortLog.Views.ShipView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <TextBlock Text="Ship View"
-               FontSize="32"
-               Margin="20"/>
-</UserControl>

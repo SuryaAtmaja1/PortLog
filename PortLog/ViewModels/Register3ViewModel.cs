@@ -69,7 +69,7 @@ namespace PortLog.ViewModels
             await _companyService.JoinCompanyAsync(company.Id, _accountService.LoggedInAccount);
             await _accountService.UpdateUserCompanyAsync(company.Id);
 
-            _navigationService.NavigateTo(new DashboardManagerViewModel(_navigationService, _accountService));
+            _navigationService.NavigateTo(new DashboardViewModel(_navigationService, _accountService));
         }
 
         private void Back()

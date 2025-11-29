@@ -1,8 +1,8 @@
 ﻿<Window x:Class="PortLog.Views.EndSailingDialogView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="End Sailing" Height="420" Width="560" WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize" Background="#FAFBFC">
+        Title="End Sailing" Height="600" Width="560" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" Background="#FAFBFC" SizeToContent="WidthAndHeight">
     <Grid Margin="18">
         <Border Background="White" CornerRadius="10" Padding="18">
             <StackPanel>

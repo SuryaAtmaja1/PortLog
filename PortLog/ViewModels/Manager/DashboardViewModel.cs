@@ -65,7 +65,6 @@ namespace PortLog.ViewModels
         public DashboardHomeViewModel HomeVM { get; }
         public CompanyManagementViewModel CompanyVM { get; }
         public FleetViewModel FleetVM { get; }
-        public ShipViewModel ShipVM { get; } = new();
         public VoyageListViewModel VoyageVM { get; }
         public InsightViewModel InsightVM { get; }
 

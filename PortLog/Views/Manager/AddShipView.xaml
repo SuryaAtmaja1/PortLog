@@ -6,7 +6,8 @@
         Height="520"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
-        Background="#F8F9FA">
+        Background="#F8F9FA"
+        SizeToContent="WidthAndHeight">
 
     <Window.Resources>
         <!-- Shadow Effect -->

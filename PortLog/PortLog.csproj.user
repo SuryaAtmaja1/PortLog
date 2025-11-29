@@ -5,37 +5,34 @@
     <Compile Update="Components\ConfirmDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\AddShipView.xaml.cs">
+    <Compile Update="Views\Manager\AddShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CompanyManagementView.xaml.cs">
+    <Compile Update="Views\Manager\CompanyManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\DashboardCaptainView.xaml.cs">
+    <Compile Update="Views\Captain\DashboardCaptainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\DashboardHomeView.xaml.cs">
+    <Compile Update="Views\Manager\DashboardHomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\DashboardManagerView.xaml.cs">
+    <Compile Update="Views\Manager\DashboardView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\DashboardView.xaml.cs">
+    <Compile Update="Views\Manager\DetailShipView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\DetailShipView.xaml.cs">
+    <Compile Update="Views\Captain\EndSailingDialogView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\EndSailingDialogView.xaml.cs">
+    <Compile Update="Views\Captain\FleetCaptainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\FleetCaptainView.xaml.cs">
+    <Compile Update="Views\Manager\FleetView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\FleetView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\InsightView.xaml.cs">
+    <Compile Update="Views\Manager\InsightView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LoginView.xaml.cs">
@@ -44,10 +41,10 @@
     <Compile Update="Views\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManageCrewView.xaml.cs">
+    <Compile Update="Views\Manager\ManageCrewView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CaptainDashboardView.xaml.cs">
+    <Compile Update="Views\Captain\CaptainDashboardView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Register1View.xaml.cs">
@@ -59,16 +56,13 @@
     <Compile Update="Views\Register3View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\SailingDialogView.xaml.cs">
+    <Compile Update="Views\Captain\SailingDialogView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ShipView.xaml.cs">
+    <Compile Update="Views\Captain\VoyageChangeStateView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\VoyageChangeStateView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\VoyageListView.xaml.cs">
+    <Compile Update="Views\Manager\VoyageListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -82,10 +76,7 @@
     <Page Update="Styles\TextBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\DashboardCaptainView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\DashboardManagerView.xaml">
+    <Page Update="Views\Captain\DashboardCaptainView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">

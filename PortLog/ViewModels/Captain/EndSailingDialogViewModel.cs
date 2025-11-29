@@ -4,6 +4,7 @@ using PortLog.Services;
 using PortLog.Supabase;
 using Supabase.Postgrest;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -79,6 +80,7 @@ namespace PortLog.ViewModels
         {
             ErrorMessage = string.Empty;
 
+            // ===== VALIDASI =====
             if (string.IsNullOrWhiteSpace(ArrivalPort))
             {
                 ErrorMessage = "Arrival port harus diisi.";
@@ -102,17 +104,15 @@ namespace PortLog.ViewModels
 
             var arrivalDateTime = ArrivalDate.Value.Date + ts;
 
-            // parse numeric fields
+            // ===== PARSE NUMBER INPUTS =====
             long? revenueCents = null;
             if (!string.IsNullOrWhiteSpace(RevenueText))
             {
-                if (decimal.TryParse(RevenueText, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var revDec))
-                {
-                    revenueCents = (long)(revDec * 100);
-                }
+                if (decimal.TryParse(RevenueText, NumberStyles.Number, CultureInfo.InvariantCulture, out var dec))
+                    revenueCents = (long)(dec * 100);
                 else
                 {
-                    ErrorMessage = "Revenue format invalid (contoh: 1250000.50).";
+                    ErrorMessage = "Revenue format invalid.";
                     OnPropertyChanged(nameof(ErrorMessage));
                     return;
                 }
@@ -146,7 +146,9 @@ namespace PortLog.ViewModels
 
             try
             {
-                // Find latest voyage for this ship with null ArrivalTime
+                // =====================================================================
+                // GET LATEST ACTIVE VOYAGE (ArrivalTime = NULL)
+                // =====================================================================
                 var resp = await _supabase
                     .Table<VoyageLog>()
                     .Where(v => v.ShipId == ShipId)
@@ -155,39 +157,50 @@ namespace PortLog.ViewModels
                     .Get();
 
                 var voyage = resp.Models.FirstOrDefault() as VoyageLog;
-                if (voyage == null || voyage.ArrivalTime != null)
+
+                if (voyage == null)
                 {
                     ErrorMessage = "Tidak ditemukan voyage aktif untuk kapal ini.";
                     OnPropertyChanged(nameof(ErrorMessage));
                     return;
                 }
 
-                // update fields
-                voyage.ArrivalPort = ArrivalPort.Trim();
-                voyage.ArrivalTime = arrivalDateTime;
-                voyage.Notes = Notes ?? string.Empty;
-                voyage.TotalDistanceTraveled = totalDistance;
-                voyage.AverageFuelConsumption = avgFuel;
-                voyage.Revenue = revenueCents;
+                // =====================================================================
+                // UPDATE VOYAGE LOG
+                // =====================================================================
+                await _supabase
+                    .Table<VoyageLog>()
+                    .Where(x => x.Id == voyage.Id)
+                    .Set(x => x.ArrivalPort, ArrivalPort.Trim())
+                    .Set(x => x.ArrivalTime, arrivalDateTime) // Add ToUniversalTime()
+                    .Set(x => x.TotalDistanceTraveled, totalDistance)
+                    .Set(x => x.AverageFuelConsumption, avgFuel)
+                    .Set(x => x.Revenue, revenueCents)
+                    .Set(x => x.Notes, Notes ?? string.Empty)
+                    .Update();
 
-                // update voyage
-                await _supabase.Table<VoyageLog>().Update(voyage);
+                Debug.WriteLine(voyage);
+                // =====================================================================
+                // UPDATE SHIP STATUS → "STANDBY"
+                // =====================================================================
 
-                // update ship status -> set to available / not sailing
-                await _supabase.Table<Ship>().Update(new Ship
-                {
-                    Id = ShipId,
-                    Status = "SAILING"
-                });
+                await _supabase
+                    .Table<Ship>()
+                    .Where(x => x.Id == ShipId)
+                    .Set(x => x.Status, "STANDBY")
+                    .Update();
 
-
+                // Close dialog
                 RequestClose?.Invoke(this, true);
             }
             catch (Exception ex)
             {
                 ErrorMessage = "Gagal menyimpan: " + ex.Message;
+                Debug.WriteLine(ErrorMessage);
+                Debug.WriteLine("Mawemek: "+ arrivalDateTime);
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
+
     }
 }

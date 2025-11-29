@@ -114,9 +114,6 @@
             <DataTemplate DataType="{x:Type vm:FleetCaptainViewModel}">
                 <views:FleetCaptainView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:ShipViewModel}">
-                <views:ShipView/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:VoyageListViewModel}">
                 <views:VoyageListView/>
             </DataTemplate>

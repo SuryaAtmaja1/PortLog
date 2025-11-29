@@ -22,9 +22,6 @@
         <DataTemplate DataType="{x:Type vm:Register3ViewModel}">
             <views:Register3View/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DashboardManagerViewModel}">
-            <views:DashboardManagerView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:DashboardCaptainViewModel}">
             <views:DashboardCaptainView/>
         </DataTemplate>

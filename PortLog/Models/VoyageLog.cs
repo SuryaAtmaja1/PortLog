@@ -15,7 +15,7 @@ namespace PortLog.Models
         [Column("ship_id")]
         public long ShipId { get; set; }
 
-        [Column("departure_time")]
+        [Column("departure_time", ignoreOnUpdate:true)]
         public DateTime DepartureTime { get; set; }
 
         [Column("arrival_time")]

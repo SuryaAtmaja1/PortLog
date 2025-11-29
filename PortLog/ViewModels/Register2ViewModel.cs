@@ -81,7 +81,7 @@ namespace PortLog.ViewModels
                 // Navigate to dashboard
                 if (_accountService.LoggedInAccount.RoleEnum == AccountRole.MANAGER)
                 {
-                    _navigationService.NavigateTo(new DashboardManagerViewModel(_navigationService, _accountService));
+                    _navigationService.NavigateTo(new DashboardViewModel(_navigationService, _accountService));
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace PortLog.ViewModels
             // Navigate to dashboard without company
             if (_accountService.LoggedInAccount.RoleEnum == AccountRole.MANAGER)
             {
-                _navigationService.NavigateTo(new DashboardManagerViewModel(_navigationService, _accountService));
+                _navigationService.NavigateTo(new DashboardViewModel(_navigationService, _accountService));
             }
             else
             {
