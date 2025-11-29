@@ -225,6 +225,94 @@ namespace PortLog.Services
             }
         }
 
+        public async Task<Account?> GetCaptainByIdAsync(Guid captainId)
+        {
+            try
+            {
+                Debug.WriteLine($"[GetCaptainByIdAsync] Fetching captain with ID: {captainId}");
+                var response = await _supabase
+                    .Table<Account>()
+                    .Where(a => a.Id == captainId)
+                    .Get();
+                var captain = response.Models.FirstOrDefault();
+                if (captain != null)
+                {
+                    Debug.WriteLine($"[GetCaptainByIdAsync] Captain found: {captain.Name} ({captain.Email})");
+                }
+                else
+                {
+                    Debug.WriteLine("[GetCaptainByIdAsync] No captain found with the given ID");
+                }
+                return captain;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[GetCaptainByIdAsync] Exception: {ex.Message}");
+                return null;
+
+            }
+        }
+
+        public async Task<List<Account>> GetAccountsByCompanyIdAsync(Guid companyId)
+        {
+            var accounts = new List<Account>();
+            try
+            {
+                Debug.WriteLine($"[GetAccountsByCompanyIdAsync] Fetching accounts for company ID: {companyId}");
+                var response = await _supabase
+                    .Table<Account>()
+                    .Filter("company_id", Postgrest.Constants.Operator.Equals, companyId.ToString())
+                    .Get();
+                accounts = response.Models.ToList();
+                Debug.WriteLine($"[GetAccountsByCompanyIdAsync] Found {accounts.Count} accounts");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[GetAccountsByCompanyIdAsync] Exception: {ex.Message}");
+            }
+            return accounts;
+        }
+
+        public async Task<List<Account>> GetCaptainsByCompanyIdAsync(Guid companyId)
+        {
+            var captains = new List<Account>();
+            try
+            {
+                Debug.WriteLine($"[GetCaptainsByCompanyIdAsync] Fetching captains for company ID: {companyId}");
+                var response = await _supabase
+                    .Table<Account>()
+                    .Filter("company_id", Postgrest.Constants.Operator.Equals, companyId.ToString())
+                    .Filter("account_role", Postgrest.Constants.Operator.Equals, "CAPTAIN")
+                    .Get();
+                captains = response.Models.ToList();
+                Debug.WriteLine($"[GetCaptainsByCompanyIdAsync] Found {captains.Count} captains");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[GetCaptainsByCompanyIdAsync] Exception: {ex.Message}");
+            }
+            return captains;
+        }
+
+        public async Task<List<Account>> GetAccountsWithoutCompanyAsync()
+        {
+            var accounts = new List<Account>();
+            try
+            {
+                Debug.WriteLine("[GetAccountNoCompanyAsync] Fetching accounts with no company");
+                var response = await _supabase
+                    .Table<Account>()
+                    .Filter("company_id", Postgrest.Constants.Operator.Is, (Guid?)null)
+                    .Get();
+                accounts = response.Models.ToList();
+                Debug.WriteLine($"[GetAccountNoCompanyAsync] Found {accounts.Count} accounts with no company");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[GetAccountNoCompanyAsync] Exception: {ex.Message}");
+            }
+            return accounts;
+        }
         public void Logout()
         {
             Debug.WriteLine($"[Logout] Logging out user: {LoggedInAccount?.Email ?? "None"}");

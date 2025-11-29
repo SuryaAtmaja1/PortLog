@@ -465,21 +465,32 @@
 
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <!-- Date -->
+                                                    <ColumnDefinition Width="*"/>
+                                                    <!-- Name -->
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <!-- Revenue -->
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Text="{Binding Date}"
-                                                           FontSize="12"
-                                                           Foreground="#666666"
-                                                           VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="0"
+                                                       Text="{Binding Date}"
+                                                       FontSize="12"
+                                                       Foreground="#666" />
 
                                                 <TextBlock Grid.Column="1"
-                                                           Text="{Binding RevenueFormatted}"
-                                                           FontSize="13"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="#00B894"
-                                                           VerticalAlignment="Center"/>
+                                                       Text="{Binding Name}"
+                                                       FontSize="12"
+                                                       Foreground="#666"
+                                                       Margin="10 0 0 0"
+                                                       VerticalAlignment="Center"/>
+
+                                                <TextBlock Grid.Column="2"
+                                                       Text="{Binding RevenueFormatted}"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#00B894"
+                                                       VerticalAlignment="Center"/>
                                             </Grid>
                                         </StackPanel>
                                     </Border>

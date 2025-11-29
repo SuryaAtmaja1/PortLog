@@ -4,6 +4,7 @@ using PortLog.Supabase;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using static Supabase.Postgrest.Constants;
@@ -14,6 +15,7 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly ShipService _shipService;
 
         // ==================== TOP CARDS ====================
 
@@ -58,6 +60,7 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _shipService = new ShipService(supabase);
 
             _ = LoadDashboard();
         }
@@ -74,15 +77,10 @@ namespace PortLog.ViewModels
         {
             try
             {
-                var companyId = _accountService.LoggedInAccount.CompanyId.ToString();
+                var companyId = _accountService.LoggedInAccount.CompanyId.Value;
 
                 // ===================== GET SHIPS =====================
-                var shipsRes = await _supabase
-                    .Table<Ship>()
-                    .Filter("company_id", Operator.Equals, companyId)
-                    .Get();
-
-                var ships = shipsRes.Models;
+                var ships = await _shipService.GetShipsByCompanyIdAsync(companyId);
 
                 var shipIds = ships.Select(s => (object)s.Id).ToArray();
 
@@ -158,16 +156,18 @@ namespace PortLog.ViewModels
                         .Table<VoyageLog>()
                         .Filter("ship_id", Operator.In, shipIds)
                         .Order("arrival_time", Ordering.Descending)
-                        .Limit(5)
+                        .Limit(1)
                         .Get();
 
                     foreach (var v in latestRes.Models)
                     {
+                        var ship = await _shipService.GetShipByIdAsync(v.ShipId);
                         LatestVoyages.Add(new DashboardVoyageItem
                         {
                             Route = $"{v.DeparturePort} → {v.ArrivalPort}",
                             Date = v.ArrivalTime.ToString(),
-                            Revenue = v.RevenueIdr
+                            Revenue = v.RevenueIdr,
+                            Name = ship.Name,
                         });
                     }
                 }
@@ -244,7 +244,7 @@ namespace PortLog.ViewModels
         public string Route { get; set; }
         public string Date { get; set; }
         public decimal Revenue { get; set; }
-
+        public string Name { get; set; }
         public string RevenueFormatted => $"Rp {Revenue:N0}";
     }
 }

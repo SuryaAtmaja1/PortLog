@@ -36,6 +36,8 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly ShipService _shipService;
+        private readonly VoyageService _voyageService;
 
         public ObservableCollection<FleetItem> Fleets { get; } = new();
 
@@ -49,6 +51,8 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _shipService = new ShipService(supabase);
+            _voyageService = new VoyageService(supabase);
 
             //_ = LoadData(); 
 
@@ -93,31 +97,13 @@ namespace PortLog.ViewModels
         {
             Fleets.Clear();
 
-            // 1. GET ALL SHIPS
-            var shipsResponse = await _supabase
-                .Table<Ship>()
-                .Filter("company_id", Constants.Operator.Equals, _accountService.LoggedInAccount.CompanyId.ToString())
-                .Get();
-
-            var ships = shipsResponse.Models;
+            var ships = await _shipService.GetShipsByCompanyIdAsync(_accountService.LoggedInAccount.CompanyId.Value);
 
             foreach (var ship in ships)
             {
-                // 2. Captain (Single -> model langsung)
-                var captain = await _supabase
-                    .Table<Account>()
-                    .Where(c => c.Id == ship.CaptainId)
-                    .Single();
+                var captain = await _accountService.GetCaptainByIdAsync(ship.CaptainId);
 
-                // 3. Last Voyage (Get -> response.Models)
-                var voyagesResponse = await _supabase
-                    .Table<VoyageLog>()
-                    .Where(v => v.ShipId == ship.Id)
-                    .Order(v => v.DepartureTime, Constants.Ordering.Descending)
-                    .Limit(1)
-                    .Get();
-
-                var lastVoyage = voyagesResponse.Models.FirstOrDefault();
+                var lastVoyage = await _voyageService.GetLatestVoyageForShipAsync(ship.Id);
 
                 Fleets.Add(new FleetItem
                 {

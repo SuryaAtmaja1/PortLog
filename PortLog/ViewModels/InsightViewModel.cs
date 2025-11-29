@@ -15,6 +15,7 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly VoyageService _voyageService;
 
         public DateTime StartDate
         {
@@ -43,6 +44,7 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _voyageService = new VoyageService(supabase);
 
             SearchCommand = new RelayCommand(async _ => await LoadInsights());
 
@@ -58,13 +60,7 @@ namespace PortLog.ViewModels
                 var start = StartDate.Date;
                 var end = EndDate.Date.AddDays(1);
 
-                var voyagesRes = await _supabase
-                    .Table<VoyageLog>()
-                    .Filter("departure_time", Operator.GreaterThanOrEqual, start.ToString("o"))
-                    .Filter("arrival_time", Operator.LessThanOrEqual, end.ToString("o"))
-                    .Get();
-
-                var voyages = voyagesRes.Models;
+                var voyages = await _voyageService.GetVoyagesByDateRangeAsync(start, end);
 
                 if (!voyages.Any())
                 {

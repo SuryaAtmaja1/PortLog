@@ -20,6 +20,7 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly ShipService _shipService;
 
         // SHIP TYPES
         public ObservableCollection<string> ShipTypes { get; }
@@ -55,6 +56,7 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _shipService = new ShipService(supabase);
 
             SaveCommand = new RelayCommand(async _ => await Save());
             _ = LoadCaptains();
@@ -64,13 +66,10 @@ namespace PortLog.ViewModels
         {
             Captains.Clear();
 
-            var res = await _supabase
-                .Table<Account>()
-                .Filter("company_id", Operator.Equals, _accountService.LoggedInAccount.CompanyId.ToString())
-                .Filter("account_role", Operator.Equals, "CAPTAIN")
-                .Get();
+            var res = await _accountService.GetCaptainsByCompanyIdAsync(
+                _accountService.LoggedInAccount.CompanyId.Value);
 
-            foreach (var c in res.Models)
+            foreach (var c in res)
                 Captains.Add(c);
 
             if (Captains.Count > 0)
@@ -99,7 +98,7 @@ namespace PortLog.ViewModels
                     CaptainId = SelectedCaptain?.Id ?? Guid.Empty
                 };
 
-                await _supabase.Table<Ship>().Insert(ship);
+                await _shipService.AddShipAsync(ship);
 
                 CloseAction?.Invoke();
             }

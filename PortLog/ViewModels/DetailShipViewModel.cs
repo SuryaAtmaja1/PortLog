@@ -17,6 +17,8 @@ namespace PortLog.ViewModels
     public class DetailShipViewModel : BaseViewModel
     {
         private readonly SupabaseService _supabase;
+        private readonly ShipService _shipService;
+        private readonly VoyageService _voyageService;
         private readonly AccountService _accountService;
         public long ShipId { get; }
 
@@ -68,6 +70,8 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _shipService = new ShipService(supabase);
+            _voyageService = new VoyageService(supabase);
             ShipId = shipId;
 
             // determine permission: manager can edit, captain cannot
@@ -100,10 +104,7 @@ namespace PortLog.ViewModels
 
         private async Task LoadData()
         {
-            var shipResp = await _supabase
-                .Table<Ship>()
-                .Where(s => s.Id == ShipId)
-                .Single();
+            var shipResp = await _shipService.GetShipByIdAsync(ShipId);
 
             _ship = shipResp;
 
@@ -123,28 +124,17 @@ namespace PortLog.ViewModels
             OnPropertyChanged(nameof(Status));
 
             // Captain
-            var captainResp = await _supabase
-                .Table<Account>()
-                .Where(a => a.Id == _ship.CaptainId)
-                .Single();
+            var captainResp = await _accountService.GetCaptainByIdAsync(_ship.CaptainId);
 
             CaptainName = captainResp?.Name ?? "-";
             OnPropertyChanged(nameof(CaptainName));
 
             // Last voyage
-            var voyageResp = await _supabase
-                .Table<VoyageLog>()
-                .Filter("ship_id", Operator.Equals, ShipId.ToString())
-                .Order("departure_time", Ordering.Descending)
-                .Limit(1)
-                .Get();
+            var voyage = await _voyageService.GetLatestVoyageForShipAsync(ShipId);
 
-            if (voyageResp.Models.Any())
-            {
-                var v = voyageResp.Models[0];
-                LastVoyage = $"{v.DeparturePort} → {v.ArrivalPort}";
-            }
-            else LastVoyage = "No voyage";
+            LastVoyage = voyage != null
+                ? $"{voyage.DeparturePort} → {voyage.ArrivalPort}"
+                : "No voyage";
 
             OnPropertyChanged(nameof(LastVoyage));
         }
@@ -207,12 +197,10 @@ namespace PortLog.ViewModels
 
             Captains.Clear();
 
-            var res = await _supabase.Table<Account>()
-                .Filter("company_id", Operator.Equals, _accountService.LoggedInAccount.CompanyId.ToString())
-                .Filter("account_role", Operator.Equals, "CAPTAIN")
-                .Get();
+            var res = await _accountService.GetCaptainsByCompanyIdAsync(
+                _accountService.LoggedInAccount.CompanyId.Value);
 
-            foreach (var c in res.Models)
+            foreach (var c in res)
                 Captains.Add(c);
 
             EditCaptain = Captains.FirstOrDefault(c => c.Id == CaptainId);

@@ -27,6 +27,8 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly ShipService _shipService;
+        private readonly VoyageService _voyageService;
 
         public ObservableCollection<VoyageListItem> Voyages { get; set; } = new();
 
@@ -50,6 +52,8 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _shipService = new ShipService(supabase);
+            _voyageService = new VoyageService(supabase);
 
             SearchCommand = new RelayCommand(async _ => await LoadVoyages());
         }
@@ -61,31 +65,19 @@ namespace PortLog.ViewModels
             Voyages.Clear();
 
             // Ambil semua voyage milik kapal company user
-            var companyId = _accountService.LoggedInAccount.CompanyId.ToString();
+            var companyId = _accountService.LoggedInAccount.CompanyId.Value;
 
-            var shipsResponse = await _supabase
-                .Table<Ship>()
-                .Filter("company_id", Operator.Equals, companyId)
-                .Get();
-
-            var ships = shipsResponse.Models;
+            var ships = await _shipService.GetShipsByCompanyIdAsync(companyId);
 
             foreach (var ship in ships)
             {
-                // Query voyage berdasarkan rentang tanggal
-                var query = _supabase
-                    .Table<VoyageLog>()
-                    .Filter("ship_id", Operator.Equals, ship.Id.ToString());
+                var voyages = await _voyageService.GetVoyagesByShipAsync(
+                    ship.Id,
+                    StartDate,
+                    EndDate
+                );
 
-                if (StartDate.HasValue)
-                    query = query.Filter("departure_time", Operator.GreaterThanOrEqual, StartDate.Value.ToString("yyyy-MM-dd"));
-
-                if (EndDate.HasValue)
-                    query = query.Filter("arrival_time", Operator.LessThanOrEqual, EndDate.Value.ToString("yyyy-MM-dd"));
-
-                var voyagesResponse = await query.Get();
-
-                foreach (var v in voyagesResponse.Models)
+                foreach (var v in voyages)
                 {
                     Voyages.Add(new VoyageListItem
                     {

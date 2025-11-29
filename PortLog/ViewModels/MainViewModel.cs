@@ -12,6 +12,8 @@ namespace PortLog.ViewModels
         public AccountService AccountService { get; }
         public CompanyService CompanyService { get; }
 
+        public ShipService ShipService { get; }
+
         public BaseViewModel CurrentViewModel
         {
             get => _currentViewModel;
@@ -26,6 +28,7 @@ namespace PortLog.ViewModels
             // 2. Inject it into your business services
             AccountService = new AccountService(SupabaseService);
             CompanyService = new CompanyService(SupabaseService);
+            ShipService = new ShipService(SupabaseService);
 
             // 3. Navigation needs this MainViewModel
             NavigationService = new NavigationService(this);

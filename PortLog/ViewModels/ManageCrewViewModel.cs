@@ -106,15 +106,12 @@ namespace PortLog.ViewModels
                 Captains.Clear();
                 AvailableUsers.Clear();
 
-                var companyId = _accountService.LoggedInAccount.CompanyId.ToString();
+                var companyId = _accountService.LoggedInAccount.CompanyId.Value;
 
                 // Fetch all crew in this company
-                var crewRes = await _supabase
-                    .Table<Account>()
-                    .Filter("company_id", Operator.Equals, companyId)
-                    .Get();
+                var crew = await _accountService.GetAccountsByCompanyIdAsync(companyId);
 
-                foreach (var acc in crewRes.Models)
+                foreach (var acc in crew)
                 {
                     if (acc.Role == "MANAGER")
                         Managers.Add(acc);
@@ -123,12 +120,9 @@ namespace PortLog.ViewModels
                 }
 
                 // Fetch all users WITHOUT a company
-                var availableRes = await _supabase
-                    .Table<Account>()
-                    .Filter("company_id", Operator.Is, (Guid?)null) // NULL company
-                    .Get();
+                var avail = await _accountService.GetAccountsWithoutCompanyAsync();
 
-                foreach (var user in availableRes.Models)
+                foreach (var user in avail)
                     AvailableUsers.Add(user);
             }
             catch (Exception ex)

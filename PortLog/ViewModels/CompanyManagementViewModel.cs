@@ -18,6 +18,7 @@ namespace PortLog.ViewModels
     {
         private readonly SupabaseService _supabase;
         private readonly AccountService _accountService;
+        private readonly CompanyService _companyService;
 
         // ========================
         // COMPANY MAIN INFO
@@ -85,6 +86,7 @@ namespace PortLog.ViewModels
         {
             _supabase = supabase;
             _accountService = accountService;
+            _companyService = new CompanyService(supabase);
 
             EditInfoCommand = new RelayCommand(_ => StartEditing());
             SaveInfoCommand = new RelayCommand(async _ => await SaveEditing());
@@ -103,10 +105,7 @@ namespace PortLog.ViewModels
                 var companyId = _accountService.LoggedInAccount.CompanyId;
 
                 // --- LOAD COMPANY DATA ---
-                var companyResponse = await _supabase
-                    .Table<Company>()
-                    .Filter("id", Operator.Equals, companyId.ToString())
-                    .Single();
+                var companyResponse = await _companyService.GetCompanyByIdAsync(companyId.Value);
 
                 Company = companyResponse;
 
@@ -121,13 +120,10 @@ namespace PortLog.ViewModels
                     Contacts.Add(c);
 
                 // --- LOAD CREW COUNTS ---
-                var crewResponse = await _supabase
-                    .Table<Account>()
-                    .Filter("company_id", Operator.Equals, companyId.ToString())
-                    .Get();
+                var crew = await _accountService.GetAccountsByCompanyIdAsync(companyId.Value);
 
-                ManagerCount = crewResponse.Models.Count(a => a.Role == "MANAGER");
-                CaptainCount = crewResponse.Models.Count(a => a.Role == "CAPTAIN");
+                ManagerCount = crew.Count(a => a.Role == "MANAGER");
+                CaptainCount = crew.Count(a => a.Role == "CAPTAIN");
             }
             catch (Exception ex)
             {
