@@ -16,9 +16,10 @@
         <Border Background="#022C2E" Grid.Column="0">
             <StackPanel Margin="12">
                 <!-- Logo / Role -->
-                <TextBlock Text="PortLog - Captain"
+
+                <TextBlock Text="PortLog"
                            Foreground="White"
-                           FontSize="18"
+                           FontSize="28"
                            FontWeight="Bold"
                            Margin="6 8"
                            FontFamily="Plus Jakarta Sans"/>

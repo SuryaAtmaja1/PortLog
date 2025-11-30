@@ -53,7 +53,7 @@ namespace PortLog.ViewModels
             _supabase = supabase;
             _accountService = accountService;
             _shipService = new ShipService(supabase);
-            _voyageService = new VoyageService(supabase);
+            _voyageService = new VoyageService(supabase, accountService);
 
             SearchCommand = new RelayCommand(async _ => await LoadVoyages());
         }

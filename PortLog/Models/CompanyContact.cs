@@ -9,7 +9,7 @@ namespace PortLog.Models
     public class CompanyContact: BaseModel
     {
         [PrimaryKey("id")]
-        [Column("id")]
+        [Column("id", ignoreOnInsert:true)]
         public long Id { get; set; }
 
         [Column("company_id")]
