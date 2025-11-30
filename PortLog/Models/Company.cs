@@ -11,7 +11,7 @@ namespace PortLog.Models
     [Table("company")]
     public class Company: BaseModel
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("id", shouldInsert: true)]
         [Column("id")]
         public Guid Id { get; set; }
 
@@ -31,7 +31,7 @@ namespace PortLog.Models
         public DateTime LastUpdated { get; set; }
 
         [Column("join_code")]
-        public string JoinCode { get; set; }
+        public string? JoinCode { get; set; }
 
         [Column("provinsi")]
         public string Provinsi { get; set; }

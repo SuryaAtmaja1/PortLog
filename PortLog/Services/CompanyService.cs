@@ -1,4 +1,6 @@
-﻿using PortLog.Models;
+﻿using System.Diagnostics;
+using PortLog.Helpers;
+using PortLog.Models;
 using PortLog.Supabase;
 using Supabase.Postgrest;
 
@@ -13,27 +15,28 @@ namespace PortLog.Services
             _supabase = supabase;
         }
 
-        public async Task<List<Company>> SearchCompaniesAsync(
-            string joinCode)
+        public async Task<List<Company>> SearchCompaniesAsync(string joinCode)
         {
             if (string.IsNullOrWhiteSpace(joinCode))
                 return new List<Company>();
 
             try
             {
+                Debug.WriteLine($"[SearchCompaniesAsync] Searching for join code: {joinCode}");
+
                 var response = await _supabase
                     .Table<Company>()
+                    .Filter("join_code", Constants.Operator.Equals, joinCode)
                     .Get();
 
-                // Filter by Join code
-                var companies = response.Models
-                    .Where(c => c.JoinCode == joinCode)
-                    .ToList();
+                var companies = response.Models.ToList();
+                Debug.WriteLine($"[SearchCompaniesAsync] Found {companies.Count} companies");
 
                 return companies;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[SearchCompaniesAsync] Exception: {ex.Message}");
                 return new List<Company>();
             }
         }
@@ -74,21 +77,30 @@ namespace PortLog.Services
             )
         {
             if (string.IsNullOrWhiteSpace(name))
-            {
-                return (null, "Company name is required.");
-            }
+                return (null, "Nama perusahaan kosong!");
+            if (string.IsNullOrWhiteSpace(address))
+                return (null, "Alamat kosong!");
+            if (string.IsNullOrWhiteSpace(provinsi))
+                return (null, "Provinsi kosong!");
 
             try
             {
+                // Generate GUID
+                Guid newCompanyId = Guid.NewGuid();
+                string joinCode = JoinCode.CreateFromGuid(newCompanyId);
+
                 var newCompany = new Company
                 {
+                    Id = newCompanyId,
                     Name = name,
                     Address = address,
-                    // TODO: Randomize Join Code, Create helper function
-                    JoinCode = "idaohzgk",
+                    Provinsi = provinsi.ToUpper(),
+                    JoinCode = joinCode,
                     CreatedAt = DateTime.UtcNow,
                     LastUpdated = DateTime.UtcNow
                 };
+
+                Debug.WriteLine($"[CreateCompanyAsync] Creating company with ID: {newCompanyId} and Join Code: {joinCode}");
 
                 var response = await _supabase
                     .Table<Company>()
@@ -96,35 +108,55 @@ namespace PortLog.Services
 
                 var createdCompany = response.Models.FirstOrDefault();
 
-                if (createdCompany != null)
+                if (createdCompany != null && createdCompany.Id != Guid.Empty)
                 {
+                    Debug.WriteLine($"[CreateCompanyAsync] Company created successfully with ID: {createdCompany.Id} & Join code: {createdCompany.JoinCode}");
                     return (createdCompany, string.Empty);
                 }
+                else
+                {
+                    // Fallback: fetch by ID
+                    Debug.WriteLine("[CreateCompanyAsync] Re-fetching company by ID");
+                    var fetchedCompany = await _supabase
+                        .Table<Company>()
+                        .Where(x => x.Id == newCompanyId)
+                        .Single();
 
-                return (null, "Failed to create company.");
+                    if (fetchedCompany != null)
+                    {
+                        Debug.WriteLine($"[CreateCompanyAsync] Company created successfully with ID: {fetchedCompany.Id} & Join code: {fetchedCompany.JoinCode}");
+                        return (fetchedCompany, string.Empty);
+                    }
+
+                    return (null, "Gagal membuat company.");
+                }
             }
             catch (Exception ex)
             {
-                return (null, $"Error creating company: {ex.Message}");
+                Debug.WriteLine($"[CreateCompanyAsync] Exception: {ex.Message}");
+                Debug.WriteLine($"[CreateCompanyAsync] Stack trace: {ex.StackTrace}");
+                return (null, $"Kesalahan saat membuat perusahaan: {ex.Message}");
             }
         }
-
-        public async Task<bool> JoinCompanyAsync(
-            Guid companyId,
-            Account user)
+        public async Task<bool> JoinCompanyAsync(Guid companyId, Account user)
         {
             try
             {
+                Debug.WriteLine($"[JoinCompanyAsync] User {user.Email} joining company {companyId}");
+
+                user.CompanyId = companyId;
+                user.LastUpdated = DateTime.UtcNow;
+
                 await _supabase
                     .Table<Account>()
-                    .Where(a => a.Id == user.Id)
-                    .Set(a => a.CompanyId, companyId)
-                    .Update();
+                    .Update(user);
 
+                Debug.WriteLine("[JoinCompanyAsync] Successfully joined company");
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[JoinCompanyAsync] Exception: {ex.Message}");
                 return false;
             }
         }

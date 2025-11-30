@@ -23,6 +23,8 @@
             <conv:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
             <conv:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
             <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <conv:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverter"/>
+            <conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
 
             <!-- Global Styles -->
             <!-- Textbox -->
@@ -91,10 +93,31 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            
+            <!-- Border Style -->
+            <Style x:Key="CardShadow" TargetType="Border">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#000000" 
+                                    Opacity="0.08" 
+                                    ShadowDepth="2" 
+                                    BlurRadius="16"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <!-- DataTemplates -->
             <DataTemplate DataType="{x:Type vm:LoginViewModel}">
                 <views:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:Register1ViewModel}">
+                <views:Register1View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:Register2ViewModel}">
+                <views:Register2View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:Register3ViewModel}">
+                <views:Register3View/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
                 <views:DashboardView/>

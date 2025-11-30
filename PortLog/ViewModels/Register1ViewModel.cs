@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using PortLog.Services;
 using PortLog.Enumerations;
+using System.Text.RegularExpressions;
 
 namespace PortLog.ViewModels
 {
@@ -16,12 +17,6 @@ namespace PortLog.ViewModels
         private string _fullName;
         private AccountRole _selectedRole = AccountRole.MANAGER;
         private string _errorMessage;
-
-        public string Username
-        {
-            get => _username;
-            set => SetProperty(ref _username, value);
-        }
 
         public string Password
         {
@@ -73,7 +68,8 @@ namespace PortLog.ViewModels
 
         private bool CanRegister(object parameter)
         {
-            return !string.IsNullOrWhiteSpace(Username) &&
+            return !string.IsNullOrWhiteSpace(FullName) &&
+                   !string.IsNullOrWhiteSpace(Email) &&
                    !string.IsNullOrWhiteSpace(Password) &&
                    !string.IsNullOrWhiteSpace(ConfirmPassword);
         }
@@ -81,19 +77,79 @@ namespace PortLog.ViewModels
         private async void Register(object parameter)
         {
             ErrorMessage = string.Empty;
-            
+
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(FullName))
+            {
+                ErrorMessage = "Nama lengkap tidak boleh kosong!";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                ErrorMessage = "Email tidak boleh kosong!";
+                return;
+            }
+
+            // Validate email format
+            if (!IsValidEmail(Email))
+            {
+                ErrorMessage = "Format email tidak valid!";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                ErrorMessage = "Password tidak boleh kosong!";
+                return;
+            }
+
             if (Password != ConfirmPassword)
             {
                 ErrorMessage = "Konfirmasi password tidak sesuai!";
                 return;
             }
 
-            var (success, error) = await _accountService.RegisterAsync(FullName, Email, SelectedRole, Password);
+            if (Password.Length < 8)
+            {
+                ErrorMessage = "Password minimal 8 karakter!";
+                return;
+            }
+
+            // Register with all required fields
+            var (success, error) = await _accountService.RegisterAsync(
+                FullName,
+                Email,
+                SelectedRole,
+                Password
+            );
 
             if (success)
+            {
+                // Navigate to Register2 (company selection/creation)
                 _navigationService.NavigateTo(new Register2ViewModel(_navigationService, _accountService));
-            else 
+            }
+            else
+            {
                 ErrorMessage = error;
+            }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Basic email validation regex
+                var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
+                return emailRegex.IsMatch(email);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void BackToLogin()
