@@ -1,10 +1,9 @@
-﻿using PortLog.Commands;      // RelayCommand
+﻿using PortLog.Commands;
 using PortLog.Enumerations;
 using PortLog.Services;
 using PortLog.Supabase;
 using System.ComponentModel;
 using System.Windows.Input;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PortLog.ViewModels
 {

@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:PortLog.ViewModels"
         xmlns:helpers="clr-namespace:PortLog.Helpers"
         mc:Ignorable="d"
-        Title="PortLog" Height="600" Width="900"
+        Title="PortLog" Height="1080" Width="1920"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:LoginViewModel}">

@@ -1,58 +1,285 @@
 ﻿<UserControl x:Class="PortLog.Views.Register1View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:models="clr-namespace:PortLog.Models"
-             xmlns:enums="clr-namespace:PortLog.Enumerations">
-    <Grid Background="#F5F5F5">
-        <Border MaxWidth="450" Background="White" 
-                CornerRadius="10" Padding="40" VerticalAlignment="Center"
-                HorizontalAlignment="Center">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" ShadowDepth="3" Opacity="0.3"/>
-            </Border.Effect>
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enums="clr-namespace:PortLog.Enumerations"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
 
-            <StackPanel>
-                <TextBlock Text="Register" FontSize="32" FontWeight="Bold" 
-                          HorizontalAlignment="Center" Margin="0,0,0,20"/>
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="AccountRoleEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:AccountRole"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
 
-                <Label Content="Username *"/>
-                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1D4ED8"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#94A3B8"/>
+                    <Setter Property="Cursor" Value="Arrow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-                <Label Content="Full Name"/>
-                <TextBox Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
+        <!-- Secondary Button Style -->
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#2563EB"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EFF6FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-                <Label Content="Email"/>
-                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+        <!-- Input TextBox Style -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                        Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#2563EB"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-                <Label Content="Password *"/>
-                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged"/>
+        <!-- PasswordBox Style -->
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                        Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#2563EB"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-                <Label Content="Confirm Password *"/>
-                <PasswordBox x:Name="ConfirmPasswordBox" PasswordChanged="ConfirmPasswordBox_OnPasswordChanged"/>
+        <!-- ComboBox Style -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </UserControl.Resources>
 
-                <Label Content="Select Role *"/>
-                <StackPanel Orientation="Horizontal" Margin="0,10">
-                    <RadioButton Content="Role 1 (Administrator)" 
-                                IsChecked="{Binding SelectedRole, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static enums:AccountRole.MANAGER}}"
-                                Margin="0,0,20,0" VerticalAlignment="Center"/>
-                    <RadioButton Content="Role 2 (Member)" 
-                                IsChecked="{Binding SelectedRole, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static enums:AccountRole.CAPTAIN}}"
-                                VerticalAlignment="Center"/>
-                </StackPanel>
+    <Grid Background="#F8FAFC">
+        <!-- Main Content -->
+        <Grid MaxWidth="1920" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding ErrorMessage}" 
-                          Foreground="Red" 
-                          Margin="0,10"
-                          Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
-
-                <Button Content="Register" 
-                       Command="{Binding RegisterCommand}"
-                       Margin="0,20,0,5"/>
-
-                <Button Content="Back to Login" 
-                       Command="{Binding BackToLoginCommand}"
-                       Background="#6C757D"/>
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,32" Width="500">
+                <TextBlock Text="Buat Akun Baru" 
+                          FontSize="32" 
+                          FontWeight="Bold" 
+                          Foreground="#0F172A"
+                          HorizontalAlignment="Center"
+                          TextAlignment="Center"/>
+                <TextBlock Text="Langkah 1 dari 3: Informasi Akun" 
+                          FontSize="14" 
+                          Foreground="#64748B"
+                          HorizontalAlignment="Center"
+                          Margin="0,8,0,0"/>
             </StackPanel>
-        </Border>
+
+            <!-- Form Card -->
+            <Border Grid.Row="1" 
+                    Background="White" 
+                    CornerRadius="12" 
+                    Padding="40, 20"
+                    Style="{DynamicResource CardShadow}">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" 
+                        Opacity="0.08" 
+                        ShadowDepth="2" 
+                        BlurRadius="16"/>
+                    </Border.Effect>
+                <StackPanel>
+                    <!-- Full Name -->
+                    <TextBlock Text="Nama Lengkap *" 
+                              FontSize="14" 
+                              FontWeight="SemiBold" 
+                              Foreground="#334155"
+                              Margin="0,0,0,8"/>
+                    <TextBox Style="{StaticResource ModernTextBox}"
+                            Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0,0,0,20"/>
+
+                    <!-- Email -->
+                    <TextBlock Text="Email *" 
+                              FontSize="14" 
+                              FontWeight="SemiBold" 
+                              Foreground="#334155"
+                              Margin="0,0,0,8"/>
+                    <TextBox Style="{StaticResource ModernTextBox}"
+                            Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0,0,0,20"/>
+
+                    <!-- Role Selection -->
+                    <TextBlock Text="Peran Akun *" 
+                              FontSize="14" 
+                              FontWeight="SemiBold" 
+                              Foreground="#334155"
+                              Margin="0,0,0,8"/>
+                    <ComboBox Style="{StaticResource ModernComboBox}"
+                             ItemsSource="{Binding Source={StaticResource AccountRoleEnum}}"
+                             SelectedItem="{Binding SelectedRole}"
+                             Margin="0,0,0,20"/>
+
+                    <!-- Password -->
+                    <TextBlock Text="Password *" 
+                              FontSize="14" 
+                              FontWeight="SemiBold" 
+                              Foreground="#334155"
+                              Margin="0,0,0,8"/>
+                    <PasswordBox x:Name="PasswordBox"
+                                Style="{StaticResource ModernPasswordBox}"
+                                PasswordChanged="PasswordBox_OnPasswordChanged"
+                                Margin="0,0,0,20"/>
+                    <TextBlock Text="Minimal 8 karakter" 
+                              FontSize="12" 
+                              Foreground="#64748B"
+                              Margin="0,-16,0,20"/>
+
+                    <!-- Confirm Password -->
+                    <TextBlock Text="Konfirmasi Password *" 
+                              FontSize="14" 
+                              FontWeight="SemiBold" 
+                              Foreground="#334155"
+                              Margin="0,0,0,8"/>
+                    <PasswordBox x:Name="ConfirmPasswordBox"
+                                Style="{StaticResource ModernPasswordBox}"
+                                PasswordChanged="ConfirmPasswordBox_OnPasswordChanged"
+                                Margin="0,0,0,20"/>
+
+                    <!-- Error Message -->
+                    <Border Background="#FEE2E2" 
+                           BorderBrush="#EF4444" 
+                           BorderThickness="1"
+                           CornerRadius="8"
+                           Padding="5"
+                           Margin="0,0,0,20"
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}">
+                        <TextBlock Text="{Binding ErrorMessage}" 
+                                  Foreground="#DC2626" 
+                                  FontSize="13"
+                                  TextWrapping="Wrap"/>
+                    </Border>
+
+                    <!-- Buttons -->
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                               Content="Kembali"
+                               Style="{StaticResource SecondaryButton}"
+                               Command="{Binding BackToLoginCommand}"/>
+
+                        <Button Grid.Column="2"
+                               Content="Lanjut"
+                               Style="{StaticResource ModernButton}"
+                               Command="{Binding RegisterCommand}"/>
+                    </Grid>
+
+                    <!-- Login Link -->
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,24,0,0">
+                        <TextBlock Text="Sudah punya akun?" 
+                                  FontSize="13" 
+                                  Foreground="#64748B"
+                                  Margin="0,0,4,0"/>
+                        <Button Content="Login di sini" 
+                               Style="{StaticResource SecondaryButton}"
+                               Padding="4,0"
+                               Command="{Binding BackToLoginCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

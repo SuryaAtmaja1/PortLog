@@ -8,7 +8,7 @@ namespace PortLog.Models
     [Table("account")]
     public class Account : BaseModel
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("id", shouldInsert: true)]
         [Column("id")]
         public Guid Id { get; set; }
 
