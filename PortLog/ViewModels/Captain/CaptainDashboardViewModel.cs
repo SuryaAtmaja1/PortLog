@@ -2,7 +2,9 @@
 using PortLog.Services;
 using PortLog.Supabase;
 using PortLog.ViewModels;
+using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -13,12 +15,11 @@ namespace PortLog.ViewModels
         private readonly PortLog.Services.NavigationService _navigationService;
         private readonly AccountService _accountService;
 
-        // Only Overview page for now
         public DashboardCaptainViewModel OverviewVM { get; }
 
         public FleetCaptainViewModel FleetCaptainVM { get; }
 
-        public VoyageChangeStateViewModel VoyageStateVM {  get; }
+        public VoyageChangeStateViewModel VoyageStateVM { get; }
 
         public ProfileCaptainViewModel ProfileCaptainVM { get; }
         public ICommand NavigateCommand { get; }
@@ -43,7 +44,6 @@ namespace PortLog.ViewModels
             _navigationService = navigationService ?? throw new System.ArgumentNullException(nameof(navigationService));
             _accountService = accountService ?? throw new System.ArgumentNullException(nameof(accountService));
 
-            // obtain supabase from main vm the same pattern as your project
             var mainVm = navigationService.MainViewModel as MainViewModel;
             var supabase = mainVm?.SupabaseService;
             var accountSvc = mainVm?.AccountService;
@@ -58,10 +58,10 @@ namespace PortLog.ViewModels
 
             OverviewVM.ParentVM = this;
 
-            // default page
             SelectedMenu = "Overview";
             CurrentPage = OverviewVM;
-            OverviewVM.OnNavigatedTo();
+
+            InvokeOnNavigatedToIfExists(CurrentPage);
         }
 
         private void OnNavigate(object parameter)
@@ -72,28 +72,56 @@ namespace PortLog.ViewModels
             {
                 case "Overview":
                     CurrentPage = OverviewVM;
-                    OverviewVM.OnNavigatedTo();
                     break;
                 case "Fleet":
                     CurrentPage = FleetCaptainVM;
-                    FleetCaptainVM.OnNavigatedTo();
                     break;
                 case "VoyageState":
                     CurrentPage = VoyageStateVM;
-                    VoyageStateVM.OnNavigatedTo();
                     break;
                 case "Profile":
                     CurrentPage = ProfileCaptainVM;
-                    ProfileCaptainVM.OnNavigatedTo();
+                    break;
+                default:
+                    CurrentPage = OverviewVM;
                     break;
             }
-        }
 
+            InvokeOnNavigatedToIfExists(CurrentPage);
+        }
 
         private void OnLogout(object parameter)
         {
             _accountService.Logout();
             _navigationService.NavigateTo(new LoginViewModel(_navigationService, _accountService));
+        }
+
+        private void InvokeOnNavigatedToIfExists(object page)
+        {
+            if (page == null) return;
+
+            try
+            {
+                var mi = page.GetType().GetMethod(
+                    "OnNavigatedTo",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    binder: null,
+                    types: Type.EmptyTypes,
+                    modifiers: null);
+
+                if (mi != null)
+                {
+                    mi.Invoke(page, null);
+                }
+            }
+            catch (TargetInvocationException tie)
+            {
+                System.Diagnostics.Debug.WriteLine($"InvokeOnNavigatedToIfExists: target invocation error: {tie.InnerException?.Message}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"InvokeOnNavigatedToIfExists: reflection error: {ex.Message}");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
