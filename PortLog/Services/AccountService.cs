@@ -176,7 +176,8 @@ namespace PortLog.Services
                 Debug.WriteLine($"[GetCaptainByIdAsync] Fetching captain with ID: {captainId}");
                 var response = await _supabase
                     .Table<Account>()
-                    .Where(a => a.Id == captainId && a.RoleEnum == AccountRole.CAPTAIN)
+                    .Filter("id", Postgrest.Constants.Operator.Equals, captainId.ToString())
+                    .Filter("account_role", Postgrest.Constants.Operator.Equals, AccountRole.CAPTAIN.ToString())
                     .Get();
                 var captain = response.Models.First();
                 if (captain != null)
