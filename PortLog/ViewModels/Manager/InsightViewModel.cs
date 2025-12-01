@@ -59,6 +59,7 @@ namespace PortLog.ViewModels
             {
                 var start = StartDate.Date;
                 var end = EndDate.Date.AddDays(1);
+                var companyId = _accountService.LoggedInAccount.CompanyId.Value;
 
                 var voyages = await _voyageService.GetVoyagesByDateRangeAsync(start, end);
 

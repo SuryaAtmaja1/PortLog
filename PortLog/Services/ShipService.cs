@@ -1,6 +1,7 @@
 ﻿using PortLog.Models;
 using PortLog.Supabase;
 using Supabase.Postgrest;
+using System.Diagnostics;
 
 namespace PortLog.Services
 {

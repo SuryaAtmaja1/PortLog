@@ -16,7 +16,7 @@ namespace PortLog.Services
             _supabase = supabase;
             _accountService = accountService;
         }
-        
+
         public async Task<VoyageLog?> GetLatestVoyageForShipAsync(long shipId)
         {
             var response = await _supabase
@@ -122,14 +122,13 @@ namespace PortLog.Services
 
         public async Task<List<VoyageLog>> GetVoyagesByDateRangeAsync(DateTime start, DateTime end)
         {
-            var companyId = _accountService.LoggedInAccount.CompanyId.Value;
-
             try
             {
+                var companyId = _accountService.LoggedInAccount.CompanyId.Value;
                 // Step 1: Get ships owned by this company
                 var shipRes = await _supabase
                     .Table<Ship>()
-                    .Where(s => s.CompanyId == companyId)
+                    .Filter("company_id", Operator.Equals, companyId.ToString())
                     .Get();
 
                 var shipIds = shipRes.Models.Select(s => s.Id).ToList();
@@ -137,13 +136,9 @@ namespace PortLog.Services
                 if (shipIds.Count == 0)
                     return new List<VoyageLog>();
 
-                // Supabase IN filter format: id1,id2,id3...
-                var inList = string.Join(",", shipIds);
-
-                // Step 2: Get voyage logs for those ships
                 var res = await _supabase
                     .Table<VoyageLog>()
-                    .Filter("ship_id", Operator.In, inList)
+                    .Filter("ship_id", Operator.In, shipIds) // <-- pass the List<Guid>
                     .Filter("departure_time", Operator.GreaterThanOrEqual, start.ToString("o"))
                     .Filter("arrival_time", Operator.LessThanOrEqual, end.ToString("o"))
                     .Get();
